@@ -28,6 +28,7 @@ library(foreach)
 library(doParallel)
 library(pwr)
 library(paramtest)
+library(ggplot2)
 ```
 
 ```{r, include=FALSE}
