@@ -1,0 +1,521 @@
+---
+title: "James' Quant II Draft Paper"
+author: "James Steur"
+date: "3/15/2018"
+fontsize: 11pt
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+# Abstract 
+This will be awesome. 
+
+```{r, results="hide", include=FALSE}
+require(knitr)
+
+# Load Packages
+library(RCurl)
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(exactRankTests)
+library(effsize)
+library(foreach)
+library(doParallel)
+library(pwr)
+library(paramtest)
+```
+
+```{r, include=FALSE}
+#Load Data & 
+require(RCurl)
+s15comments <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Summer_2015_comments_final.csv"))
+s15students <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Summer_2015_students_final.csv"))
+Class1 <- subset(s15students, Class ==1)
+Class2 <- subset(s15students, Class ==2)
+temp1<-ddply(s15comments,.(Class,Paper,Student),summarize,TotStyle1=length(Style==1),
+             TotStyle2=sum(Style==2),TotStyle3=sum(Style==3),TotStyle4=sum(Style==4),
+             TotPurp1=length(Purpose==1),TotPurp2=sum(Purpose==2),
+             TotPurp3=sum(Purpose==3),TotPurp4=sum(Purpose==4),TotLevel1=length(Level==1),
+             TotLevel2=sum(Level==2), TotLevel3=sum(Level==3))
+```
+
+# **Part I** 
+
+##The Digital Age Emphasizes Knowledge
+
+In the Digital Age, students at the high school and undergraduate level continue demphasizing content knowledge. As computers continue advancing with faster processing speeds, many students believe they can "just use Google" to answer all their questions. However, students cannot force Google to create new philosophies or statistical methods. There are certain skills like critical thinking, communicating, and writing that students must develop on their own. Computers alone cannot teach students the necessary skills to succeed in the 21st Century. Since an endless bounty of knowledge and data surround students, one critical skill that students should develop is clear writing. Why should they develop better writing skills? First, writing is the number one skill that employers look for in future employees (citation), which makes future individuals more hireable. Second, writing helps develop clear communication skills. Perhaps students are capable of finding information on the internet, but the act of writing forces someone to clearly explain information to their audience in a succint way. Last, writing is an extension of critical thinking. Perhaps students are capable of finding information on the internet, but the ability to discern when information is from trusted and untrusted sources is key. Writing develops critical thinking skills that allow individuals to understand what content knowledge they should memorize, be more analytical with their sources, and most critically--develop the wisdom to implement knowledge in a way that is meaningful to their future or lives. 
+
+##Teachers Disagree About How to Teach Writing
+
+I make the (hopefully uncontroversial) claim that writing is an invaluable skill to develop. So, the question becomes, "How do people learn to write well?" A wide litereature exists on the theory and teaching of writing to students. Expressivism stresses that teachers should cultivate writers' unique voices through creative exercises such as poetry and force the writer to make their own choices (citation). Current traditionalists emphasize that writing follows a "correct" set of identifiable rules, and writers must follow these rules to produce excellent papers: they love to correct your grammar and punctuation (citation). I only highlighted two ways to teach writing, but there exists an endless array of theories on the "proper" way to teach writing. Interestingly, these theories lack one critical element: data. Teachers, professors, and researchers make different claims about different theories of writing that help students learn the most. However, proponents of these claims often ground their arguments in terms of ideology or logic. Ultimately, conversations about which theory educators should use, like current traditionalism or expressivism, ends in "I teach this way; you teach your way." 
+
+This "agree to disagree" mentality has led the literature to focus on students’ perceptions of feedback on their papers. For instance, a study done by (citation) determined that students feel attacked and morally judged with “excessive” commenting. Conversely, a study done by (citation) determined that students who receive “too few” comments desire additional feedback. 
+
+##Missing Gap: How should we comment? Why should we care? 
+
+However, almost no literature uses quantitative data to support specific theories and styles of teaching writing (Anson, 2008). I found no research that shows students improve their writing from a specific style of paper commenting. The lack of research on how professors' influence student learning is important for a variety of reasons. Teachers should care about conducting this type of research to produce quantifiable reasons that justify their commenting choices on student papers. Rather than teachers offering feedback on untested theories and unfounded data about what helps student learn, this line of research can offer specific commenting styles that can improve student learning outcomes. Indeed, college campuses generally assume that first year general education English courses are effective at teaching writing to college students, but there is little evidence supporting this point. 
+
+An extended implication of producing this literature is reproducible research. At this point, the field of writing studies is plauged with anecdotal examples and theories that are untested with data. Reseachers and educators meta-analysis anecdotally note improvements in their students' abilities, however, there is no existing database, record, or meta-analysis to support these claims. To some extent, educators teach their students writing however their instituion told them how to do it. Educators simply rely on their perceptions of student learning, and could be biased in their interpretation of student learning. Identifying specific commenting styles on student papers could encourage future college campuses and public schools to adopt commenting styles that are effective in helping students learn how to write.  
+
+In the end, professors can understand how their comments influence students' writing and thinking from conducting research, but for some reason there is a large hole. All of this existing literature, or lack thereof, drove my primary research question: How do professors’ comments on first year English composition students influence student writing? At a broad level, I want to identify **any** improvement that commenting has on student writing. I also want to explore a related subquestion: do certain styles of commenting result in more improvement?
+
+##Research Design 
+
+This observational study was conducted at a liberal arts college in the Rocky Mountains over the summer of 2015. An email was sent to all professors in May of 2015 who taught first-year English courses to assit with this research project, and two professors agreed to help. As a result, my project used a convenience sample of students. Afterewards, communication occured between the researchers and professors in order to collect appropriate materials. Both professors agreed to provide their students' first and last papers for their classes in the spring of 2015. Researchers collected papers after professors finished teaching the class to reduce performative commenting. That is, researchers wanted to ensure professors commented on student papers in a natural setting without observation. All particiapnts names and grades were omitted from these papers for evaluation purposes. Then, I used a modified code scheme (Beason, 1993) with another researcher to assess the different dimensions of professors' commenting styles on student papers (see Appendix 1). [^1]: After reviewers read the papers, there was no evidence to indicate that any of the participants were non-native English speakers. [Include more explanation of this breakdown.] Next, another researcher and I used a rubric to assess the quality of all students' papers across four different levels: macro, mid, micro, and overall quality (Appendix 2). [Include more elaboration of this appendix/breakdown.] We scored each of these different levels by reading the paper, discussing our thoughts, and agreeing on a final score for each paper. 
+
+##Focusing on the Effects of a Cause 
+
+Literature in philosophy of science emphasizes the incredible difficulty of humans discerning the causes of an effect. This concern is not unique to philosophy: statisticians note the difficulty in identifying all lurking variables that could moderate or influence their results. For example, it is difficult to identify all the INUS conditions that trigger depression in individuals. Everyone has a unique set of causual factors that are biological, environmental, and contextual that create the effect of depression. Doctors can make educated gusses about which factors result in depression, but sometimes it is simply too difficult to know what truly causes depression. Human beings are limited creatures that cannot observe all factors in the world, but it is far easier for them to identify the effects of a cause. A doctor can ask a series of questions and assert with confidence that someone is depressed.
+
+In the spirit of the philosophy of science litereature, this study primarily aims to see the effects of a cause rather than the causes of an effect. One reason for this emphasis is simply due to data limitations. Unfortunately, the only identifying information researchers obtained in this study was that all students were 1st years and in their second semester of college. Given these limitations, it is impossible for me to identify all the potential lurking variables that could influence student performance. Perhaps a student had a death in the family which impacts their school performance or perhaps some students are simply more motivated. There are many lurking variables that confound the specific causal mechanisms of my design. As a result, I focus on showing the effects of a cause first and then discuss INUS condictions that could influence these results. 
+
+# **Part II** 
+
+##Methodology 
+
+The popultation of interest in this study is first year undergraduate collge students. At a more abstract level, my population of interest is all undergraduate students who take a general education English course In the end, the comparison I want to show is that students who take these classes do, in fact, improve or learn.
+
+There are four outcome variables of interests in this dataset: the micro, mid, macro, and overall quality of all students' papers. This study is a within-subjects design as I have all the students first and last papers of the semester. The first paper for all students functions as a pretreatment condition. Since this was the first writing assignment all students completed, no other written comments from professors confounded these initial assessments of the overall groups. At the end of the day, I'm interested in seeing if the overall group of students improved their writing ability, so I want to calculate the overall means for all of the students' first papers. Then, I would want to calculate the means of the students' second papers and look at the average difference in the means after the treatment, or written comments, were provided. Given my research question, I decided to use the paired-sample t-test to answer my research question. Most researchers use a paired sample t-test when they want to compare two sets of measurment to see how group means are different. Given my small sample size of n=26, one additional benefit of this test is the increased statistical power. Such a "repeated measures" test compares these measurements within subjects, rather than across subjects, and will generally have greater power than an unpaired test.
+
+I chose to combine all of the students together in the analysis for two reasons. First, my primary research question is seeing if any discernable effect is occuring from professors' comments on student writing. Although the professors comment in a different way, these comments can both be considered treatments. Ideally, students in both classes after they are pooled together show improvement. Second, the two student groups are similar in a variety of ways. They are all first-year students, they are all taking an introductory English course, and they are all in their second semester of undergrad. The student populations shoudld largely be homogenous groups. 
+
+Since I am interested in the differences between the two group means, I decided to conduct a paired sample t-test with alpha=0.05. There are a few assumptions regarding the paired sample t-test: 1). The observations are independent of one another. 2). The dependent variable should not include outliers. (citation). In this case, it is reasonable for us to assume that the observations are independent of another. In human speak, this simply means that one students overall score on a paper does not influence another student's overall score. Further, there are no outliers in my dependent variable. All students received similar scores to one another. Finally, I can confidently say that the variences are assumed to be equal to one another. [Include more information about the assumptions of the paried sample t-test and justify your choice more to use this test.]
+
+```{r, results="hide", include=FALSE}
+##Paired Sample T-Test for all outcome variables of interest. 
+t.test(s15students$Overall2, s15students$Overall1, paired = TRUE, alternative = "two.sided")
+t.test(s15students$Macro2, s15students$Macro1, paired = TRUE, alternative = "two.sided")
+t.test(s15students$Mid2, s15students$Mid1, paired = TRUE, alternative = "two.sided")
+t.test(s15students$Micro2, s15students$Micro1, paired = TRUE, alternative = "two.sided")
+```
+After conducting the paired sample t-test, I fail to reject the null hypothesis for both micro and mid-level improvement in student writing. Mid and micro's respective *p*-values are 0.2 and 0.2. Although it is possible that I am committing a type II error and falsely reject the null hypothesis, it appears that there is no statistically significant relationship between micro and mid-level improvement for student papers. In practical terms, this means it is unlikely that professors comments on student papers are improving students' ability to write prolific sentences or precise grammar. Whatever improvement students' demonstrate in mid or micro-level comments are most likely due to chance. 
+
+For my macro and overall outcome variables, I reject the null hypothesis. The paired sample t-test found *p* values of 0.001 and 0.005 for the overall and macro outcome variables respectively. It could be possible that I commit a type I error and falsey fail to reject the null hypothesis, but it appears there is a statistically significant relationship between overall and macro-level improvement for student papers. In practical terms, this means it is likely that professors comments on students papers are improving students' ability in organizing their papers and producing overall better writing. The improvements we see from students' overall and macro level aspects of their papers are most likely due to professors commenting on their papers. In the end, there is evidence that suggests teachers' comments on student writing appear to produce quantifiable student learning.  
+
+But, this is only one p-value for both outcome variables overall and micro. I want to be especially cautious and run a permutation test of all my different variables. Why am I running a permutation based test? The permutation test is a nonparametric way to test for differences between my samples. One advantage to this approach is that I do not need to assume the type of distribution my data follows. If the data did not follow a normal distribution, and I conducted my analysis the results could be confounded by this initial assumption. The second advantage of this approach is that I test all possible combinitations of my control and treatment groups with my given data, so I can be more confident that the effects I see are not due to chance. [Need to include more explanation of permutation based testing.]
+```{r, results="hide", include=FALSE}
+#Paired Permutation Test with Package
+perm.test(s15students$Overall1, s15students$Overall2, paired = T, alternative = "two.sided")
+perm.test(s15students$Macro1, s15students$Macro2, paired = T, alternative = "two.sided")
+#Paired Permutation Test with Code
+set.seed(1234)
+nullR <- numeric(length = 26)
+nullR[1] <- cor(s15students$Overall1, s15students$Overall2) ## obsered R in [1]
+N <- length(s15students$Overall1)
+for(i in seq_len(25) + 1) {
+    nullR[i] <- cor(s15students$Overall1[sample(N)], s15students$Overall2)
+}
+## two sided
+sum(nullR >= abs(nullR[1])) / length(nullR)
+```
+After running the permutation test for my varibles overall and macro, I found a p-value of 0.004 for overall and 0.01 for macro level, so I reject the null hypotheses. These results suggest that students are improving the quality of their overall papers, and these effects are most likely not due to chance. After running the paired sample t-test and permutation test, it is still possible that I am commiting a type I error and the effects we see in student improvement are false positives. However, running both tests gives me more confidence that I am less likely to comit a type I error with my data. 
+
+P-values can be deceptive though! A p-value alone does indicate evidence against our null hypothesis, but it doesn't tell us anything about the effect size we observe. A p-value, after all, doesn't capture the effect size of my variables. So, what are the effect sizes for overall and macro? In order to calculate the effect sizes of my outcomes varaibles, I decided to find Cohen's d. One reason I decided to use Cohen's d was to calculate the effect sizes from the difference in means between the students' first and second papers. [Need to include more discussion of Cohen's d here.]
+
+```{r, results="hide", include=FALSE}
+#Effect size with package
+res = cliff.delta(s15students$Overall1,s15students$Overall2,return.dm=TRUE)
+    print(res)
+    print(res$dm)
+
+cohen.d(s15students$Overall2,s15students$Overall1,pooled=TRUE,paired=TRUE,
+                       na.rm=FALSE, hedges.correction=FALSE,
+                       conf.level=0.95,noncentral=FALSE)
+
+cohen.d(s15students$Macro2,s15students$Macro1,pooled=TRUE,paired=TRUE,
+                       na.rm=FALSE, hedges.correction=FALSE,
+                       conf.level=0.95,noncentral=FALSE)
+##Cohen’s d and Hedges’ g are interpreted in a similar way. Cohen suggested using the following rule of thumb for interpreting results: Use Cohen when n > 20 and Hedge when n < 20
+```
+I found an effect size of 0.71 for overall and an effect size of 0.61. Given my small sample size, these effect sizes are fairly large. This means that students appear to be improving at a meaningful rate!
+
+====In this next section, I will calculate the error rate for my overall and macro level outcomes variables. I'm still working on this at this point, but this process should also show that my findings are even more robust. >:(. I wish the R code worked. 
+
+After I calculated the error rate, I decided to calculate the power rate of my overall and macro level outcome variables. The power rate is going to assess the probability of me making a type II error given the size of my data set.
+```{r}
+##Power for overall comparison
+plot.power.htest(pwr.t.test(n=26, d=0.7188, sig.level = 0.05, power=NULL))
+
+##Power for macro comparison
+plot.power.htest(pwr.t.test(n=26, d=.6068, sig.level = 0.05, power=NULL))
+```
+I found a power rate of 0.72 for macro and 0.61 for macro. Overall, given my small sample sizes, these power rates aren't too bad. We, of course, want higher power if possible, but with a sample size of 26 this is pretty good. Ideally, I would want power around 0.8, these are still fairly good powers. This means that I most likely did not falsely reject the null hypothesis. [Talk more about how you performed power calculation and the underlying assumptions here--justify! You ran a 1000 simulations of the data to make sure you were being cautious.]
+```{r, results="hide", include=FALSE}
+# create user-defined function to generate and analyze data
+#simNum
+#N=Sample Size
+#d=Effect Size
+set.seed(12345)
+t_func <- function(simNum, N, d) {
+    x1 <- rnorm(N, 0, 1)
+    x2 <- rnorm(N, d, 1)
+    
+    t <- t.test(x1, x2, var.equal=TRUE)  # run t-test on generated data
+    stat <- t$statistic
+    p <- t$p.value
+
+    return(c(t=stat, p=p, sig=(p < .05)))
+        # return a named vector with the results we want to keep
+}
+##Package paramtest
+power_ttest <- run_test(t_func, n.iter=1000, output='data.frame', N=26, d=0.7188)  # simulate data
+results(power_ttest) %>%
+    summarise(power=mean(sig))
+```
+What does all of this analysis actually say about students learning how to write? The bottom line is that students appear to be learning how to write better from their classes. Since we see an average shift of 0.5 in the mean difference for comments, this means that most students started out at a "B" level of writing in this class, and they ended up improving with a final paper grade of "B+" or "A-." This is a huge shift in learning for one semester! Simply showing that students are learning how to write from professors comments is an important milestone, but I'm also interested in seeing if one professors' style of commenting resulted in greater improvement for certain students.
+
+```{r}
+#Class Specific T-Tests
+t.test(Class1$Overall2, Class1$Overall1, paired = TRUE, alternative = "two.sided")
+t.test(Class2$Overall2, Class2$Overall1, paired = TRUE, alternative = "two.sided")
+t.test(Class1$Macro2, Class1$Macro1, paired = TRUE, alternative = "two.sided")
+t.test(Class2$Macro2, Class2$Macro1, paired = TRUE, alternative = "two.sided")
+```
+Even with our small sample sizes, it appears that we are detecting an interesting effect. The p-values for all of these different values are different. We are still finding some statistically significant results. [Write down actual p-values or put them in a table in final paper.]
+
+```{r, results="hide", include=FALSE}
+##Permutation Test Between Classes
+perm.test(Class1$Overall1,  Class1$Overall2, paired = T, alternative = "two.sided")
+perm.test(Class2$Overall1,  Class2$Overall2, paired = T, alternative = "two.sided")
+perm.test(Class1$Macro1,  Class1$Macro2, paired = T, alternative = "two.sided")
+perm.test(Class2$Macro1,  Class2$Macro2, paired = T, alternative = "two.sided")
+```
+```{r, results="hide", include=FALSE}
+##Effect Size Between Classes with Hedges
+
+ res = cliff.delta(Class1$Overall1,Class1$Overall2,return.dm=TRUE)
+    print(res)
+    print(res$dm)
+
+cohen.d(Class1$Overall2,Class1$Overall1,pooled=TRUE,paired=TRUE,
+                       na.rm=FALSE, hedges.correction=TRUE,
+                       conf.level=0.95,noncentral=FALSE)
+
+res = cliff.delta(Class2$Overall1,Class2$Overall2,return.dm=TRUE)
+    print(res)
+    print(res$dm)
+
+cohen.d(Class2$Overall2,Class2$Overall1,pooled=TRUE,paired=TRUE,
+                       na.rm=FALSE, hedges.correction=TRUE,
+                       conf.level=0.95,noncentral=FALSE)
+
+cohen.d(Class1$Macro2,Class1$Macro1,pooled=TRUE,paired=TRUE,
+                       na.rm=FALSE, hedges.correction=TRUE,
+                       conf.level=0.95,noncentral=FALSE)
+cohen.d(Class2$Macro2,Class2$Macro1,pooled=TRUE,paired=TRUE,
+                       na.rm=FALSE, hedges.correction=TRUE,
+                       conf.level=0.95,noncentral=FALSE)
+```
+[Elaborate more on power calculation you did here. You decided to calculate your effect size with Hedges' g due to the smaller sample size. Also talk about underlying stats here.)
+
+This isn't good! After I ran my permutation test, it appears that I fail to reject the null hypothesis in most cases! This is most likely due to the smaller sample sizes. Let's check the power of my new subsamples to see if there could be a problem there. 
+
+```{r}
+pwr.t.test(n=16, d=0.6674, sig.level = 0.05, power=NULL)
+pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
+pwr.t.test(n=16, d=0.524, sig.level = 0.05, power=NULL)
+pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
+```
+Oh boy. This is not good. It appears that I have very lower power rates. This is unfortunate. It's highly possible that some type of effect is occuring with these students, but the sample size is so small that I'm not detecting any effect. I do detect an effect for overall improvement with paper 1. This could suggest that professor 1 is giving comments which are indicating greater improvement in the overall papers, and professor 2 is giving comments that are resulting in less improvement in a statistically signficant way. However, given my low power rates it's highly possible there is an effect going on with the second batch of students. 
+
+##How are Professors Commenting?
+```{r, results="hide", include=FALSE}
+#Means, Medians, Range, & 50% coverage intervals For Overall First Paper & Second Paper 
+mean(Class1$Overall1)
+mean(Class1$Overall2)
+range(Class1$Overall1)
+range(Class1$Overall2)
+quantile(Class1$Overall1, c(0.25, 0.75))
+quantile(Class1$Overall2, c(0.25, 0.75))
+#Means, Medians, Range, & 50% coverage intervals For Overall Third Paper & Fourth Paper 
+mean(Class2$Overall1)
+mean(Class2$Overall2)
+range(Class2$Overall1)
+range(Class2$Overall2)
+quantile(Class2$Overall1, c(0.25, 0.75))
+quantile(Class2$Overall2, c(0.25, 0.75))
+#Means, Medians, Range, & 50% coverage intervals For Macro First Paper & Second Paper
+mean(Class1$Macro1)
+mean(Class1$Macro2)
+range(Class1$Macro1)
+range(Class1$Macro2)
+quantile(Class1$Macro1, c(0.25, 0.75))
+quantile(Class1$Macro2, c(0.25, 0.75))
+#Means, Medians, Range, & 50% coverage intervals For Macro Third Paper & Fourth Paper
+mean(Class2$Macro1)
+mean(Class2$Macro2)
+range(Class2$Macro1)
+range(Class2$Macro2)
+quantile(Class2$Macro1, c(0.25, 0.75))
+quantile(Class2$Macro2, c(0.25, 0.75))
+```
+For purposes of clarity, all means, medians, ranges, and 50% coverage intervals are for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The median scores for papers 1, 2, 3, and 4 respectively are 2, 2.5, 2, and 3.The ranges for papers 1, 2, 3, and 4  The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. 
+
+```{r}
+#Summarize Variables of Interest 
+
+##Barplots
+
+##Purpose
+#====5 & 6 are NA's. Need to remove. 
+counts1 <- table(s15comments$Class, s15comments$Purpose)
+barplot(counts1, main="Frequency of Purpose Comments For Class 1 & 2",
+  xlab="Purpose of Commenting", col=c("darkblue","red"),
+ 	ylim=c(0,100), legend = rownames(counts1), beside=TRUE)
+
+##Style 
+counts2 <- table(s15comments$Class, s15comments$Style)
+barplot(counts2, main="Frequency of Style Comments For Class 1 & 2",
+  xlab="Style of Commenting", col=c("darkblue","red"),
+ 	ylim=c(0,120), legend = rownames(counts2), beside=TRUE)
+
+##Level 
+counts3 <- table(s15comments$Class, s15comments$Level)
+barplot(counts3, main="Frequency of Level Comments For Class 1 & 2",
+  xlab="Level of Commenting", col=c("darkblue","red"),
+ 	ylim=c(0,140), legend = rownames(counts3), beside=TRUE)
+
+##Article
+counts4 <- table(s15comments$Class, s15comments$Article)
+barplot(counts4, main="Frequency of Article Comments For Class 1 & 2",
+  xlab="Level of Commenting", col=c("darkblue","red"),
+ 	ylim=c(0,40), legend = rownames(counts4), beside=TRUE)
+
+curve(qt(.975,x), from = 2 , to = 100, ylab = "Quantile 0.975 ", xlab = "Degrees of freedom", main = "Student t distribution")
+abline(h=qnorm(.975), col = 2)
+```
+
+When creating my barplots, I was unable to change the legend for all of them--I'll work on fixing this later. [I had ggplot graphics, but they aren't working. >:(. I'll talk to Ekrem or Lula later. So frustrating. Instead of having "1" on the x-axis, it should be listing the corresponding type of comment/style listed in the appendix.] The blue #1 respresents the first class and the red #2 represents the second class. I will also work on fixing the legend for the last graph I present. So far, this is solely descriptive analysis across four different variables of interest that function as a type of treatment. This analysis fuses paper 1 & 2 as well as paper 3 & 4. This is simply meant to demonstrate the most common approaches that both professors took in making comments about their papers. 
+
+To begin, there is is a noticeable difference in the primary way that professor one and two comment in terms of their purpose. Professor one has a high frequency of praising their students work. Professor two has a high frequency of advising by giving general feedback but not making any sort of correction. Both professors had an equal level of problem detecting. 
+
+Second, Professor one's style of commenting was primarily evaluative. This style of commenting evaluates the writing quality as "good" or "bad." Professor two's style of commenting was primarily a directive approach. Offers feedback that advises a student to directly make a change in their writing but does not directly make the change. 
+
+Third, Professor one made more comments that were related to big-picture features of the writing. Professor two made a large amount of comments about global features of writing as well, but not as many as professor 1. Professor two did make more comments on micro-level features of student writing than professor one. Both professors made roughly the same amount of comments about sentence level features of their students' writing. 
+
+Fourth, in terms of articles, professor 1 has the highest number of comments for organization, evidence, and logic and reasoning. Professor 2 had the highest number of comments for citation errors and the works cited page. 
+
+```{r}
+##========Rewriting to be factors
+s15comments2 <- s15comments
+s15comments2$Class <- factor(s15comments2$Class, labels = c("Professor 1", "Professor 2"))
+s15comments2$Style <- factor(s15comments2$Style, labels = c("Directive", "Nondirective", "Corrective", "Evaluative"))
+s15comments2$Purpose <- factor(s15comments2$Purpose, labels = c("Problem Detecting",
+            "Advising", "Editing", "Praising", "Describing", "Topical Commenting"))
+counts <- as.matrix(temp1$TotStyle1, temp1$TotStyle2, temp1$TotStyle3, temp1$TotStyle4)
+class(counts)
+barplot(counts, main="Car Distribution by Gears and VS",
+  xlab="Number of Gears", col=c("darkblue","red", "green", "blue"),
+ 	legend = rownames(counts), beside=TRUE)
+ggplot(s15comments, aes(Style, fill=as.factor(Purpose)))+geom_bar(position="dodge")
+
+##=====Try making widths of histogram the same. 
+
+s15comments2 %>% filter(Style!="NA" & Purpose != "NA") %>%
+  ggplot(aes(Style, fill=Purpose))+
+  geom_bar(position="dodge")+
+  facet_wrap(~Class, ncol=2)+
+  ggtitle("Overall Professor Comments")+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle=45, hjust=1), 
+        plot.title = element_text(hjust=0.5))+
+  scale_x_discrete(drop=FALSE)
+
+s15comments2 %>% filter(Style!="NA" & Purpose != "NA") %>%
+  group_by(Class,Purpose) %>%
+  count(Style) %>% 
+  ggplot(aes(Style, n, fill=Purpose))+
+  geom_col(position="dodge")+
+  facet_wrap(~Class, ncol=2)+
+  ggtitle("Overall Professor Comments")+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle=45, hjust=1), 
+        plot.title = element_text(hjust=0.5))+
+  scale_x_discrete(drop=FALSE)
+```
+
+
+# **Part III** 
+
+##Discussion
+
+[Include more description about the ways these professors were commenting on everything. Also get your graphs and contigency tables to pop up approprietly.]
+
+##Limitations/Future Directions
+
+This study was limited in a few ways. First, it was difficult obtaining supplementary information about all of the different students. It is possible that some of them came from high schools that prepared them for college better. Indeed, there are a slew of differences that could be partialy or entirely due to pre-existing differences between the two groups of students. In this way, the students' could simply have different abilities at the start of the course, which confound the final result of improvement. A future study could try to identify these covariates in the students beforehand and then match based on observed covariates. Matching helps reduce the degree to which these variables confound the results, and a sensitivity analysis can provide further evidence to suggest that the professors written comments resulted in student improvement. 
+
+A second limitation in the study was the small sample size of n=26. When all participants were pooled together for purposes of analysis, the statistical analysis began to detect effects. However, once participants were divided into professor strata, the power rate of all analyses greatly declined. Future researchers should be aware of how time consuming this process was for the five researchers involved with a sample size of n=26. In order to conduct a larger study, 
+
+Third, the last major limitation of this study is that it only looks at the professors first and last comments on the papers. 
+
+Fourth, students enter college from vaslty different backgrounds. Certain styles of commenting may be more beneficial for an average groups of students who come from a middle or upper class background and higher degrees 
+
+(Make sure to include strengths of design here as well! There are positive aspects of the study.)
+
+Future directions for this research could include making a machine learning algorithim and conducitng analysis at a larger public research university. This could allow for a larger n-size and cut down on the time that it took the researchers to code all of the different dimensions of the comments. There could also be additional levels added for future analysis. 
+
+\pagebreak
+
+#References
+In this section, I'll include my references!
+
+\pagebreak
+
+#Appendix 1
+
+##Coding & Identification System for Professors Comments on Student Writing
+
+##Part 1: This section is attempting to identify the professor’s purpose in making the comment. The individual looking at the paper should identify the best fit from the items listed below.
+
+1.	Problem Detecting: Indicates a problem, concern, or error (e.g., "SP" "What?" "Coherence" "This isn't quite accurate."). 
+2.	Advising: Gives general options or direction but does not offer the actual deletion, punctuation, or language needed (e.g., "Consider deleting some of this." "This would be convincing if you addressed the opposition." "Can you explain more clearly?"). Might explain why change is needed. 
+3.	Editing: Indicates a problem and supplies the actual deletion, punctuation, or language needed (e.g., "Put comma here." "Drop this." "Would 'person' be a better word?"). Might explain why change is needed. Praising: Shows approval (e.g., "Great!" "You've hit upon some-thing.").
+4.	Praising: Indicates approval, which may or may not include a suggestion. (e.g., "Good! Add more of this!" "Nicely said but content needs work."). 
+5.	Describing: Describes text or paraphrases in an apparently neutral way (e.g., "The paper supports ethics in journalism"). 
+6.	Topical Commenting: Reflects on the subject (rather than on the writing) in an apparently neutral way (e.g., "This makes me think about values." "There is a law dealing with this problem you raise." "This is a popular topic"). 
+7.	Other: Does not fit any of the above. Please specify the professor’s purpose in making the comment by offering a different reasoning not offered above. 
+
+##Part 2: This section is attempting to identify the style of commenting that the professor is utilizing. The individual looking at the paper should identify the most accurate style of commenting from the items listed below. Comments can be considered in one of three categories:  directive, nondirective, and corrective. 
+
+1.	Directive. Offers feedback that advises the students in order to correct a problem or directly identify a positive component of their writing, but does not directly make the change. One example a professor may write would be, “In future papers you should think about developing your thesis a little more.” Another example an instructor may write is, “Excellent word choice and thesis!” 
+2.	Nondirective. Offers feedback that poses questions, indicates neutral thoughts about the paper, or makes marks that indicate a good idea or problem with the paper on some level, but in such a way that allows the writer of the paper to figure it out. (How do you feel about this topic? What do you enjoy about your paper?) 
+3.	Corrective. Corrects a problem explicitly with crossing out, adding punctuation, or other such methods that indicate to the writer a problem exists and provides the solution. Something a professor might do to indicate this would be crossing out a semicolon and indicating that it should be a comma instead. 
+4.	Evaluative. Offers explicit judgment or identification of the student’s or paper’s strengths and weaknesses. Gives praise or criticism of the paper in general. Writes comments that evaluate the student or work. Writes that the paper or a specific portion of the work is “good” or “bad.” For example, a professor may write, “This paper is terrible and needs work.” This would be considered evaluative. 
+
+##Part 3: This section is attempting to identify if the professor is offering comments on the macro, mid, or micro-level. The individual looking at the paper should attempt to identify one level of writing the comment is directed at and the specific article the comment is attempting to identify. For example, if the researcher decides the professor’s comment is macro-level oriented, the research would follow up with specifying that it was a thesis level problem.  
+
+##Macro-Level Features (Macro=3):
+  Article
+1.	Thesis
+A paper articulates a thesis with a clear and specific topic, an arguable claim, and conveys the implications of his or her work in a coherent manner. 
+
+2.	Organization
+Paper builds in a manner that makes logical sense. 
+
+3.	Evidence
+Evidence used throughout the paper is effective and suitable to the argument(s) presented. 
+
+4.	Depth and Thoroughness of Discussion
+Paper is thorough. 
+
+5.	Logic and Reasoning 
+The paper is logical and builds upon sound reasoning. 
+
+##Mid-Level Features (Mid=2):
+  Articles
+6.	Syntax and Overall Composition of Sentences 
+Sentences vary their construction, are not repetitive, and communicate meaning effectively. 
+
+7.	Effective Transitions
+Transitions are used effectively throughout sentences. 
+
+8.	Topic Sentences 
+Sentences effectively convey the paragraphs argument or area of interest. 
+
+9.	Sentence Conciseness 
+Sentences are concise and non-verbose. 
+
+##Micro-Level Features (Micro=1): 
+  Articles
+10.	Grammar 
+Follows conventions of grammar and usage that is appropriate in an American academic setting. 
+
+11.	Punctuation 
+Punctuation is used in a manner that conveys intended meanings.
+
+12.	Spelling
+Words are spelled correctly and appropriately. 
+
+13.	Word Choice
+Diction and tone reflects an appropriate meaning of each word.
+
+14.	Capitalization 
+Words are appropriately capitalized. 
+
+15. Citation/Works Cited Page 
+Citation style follows conventions that are appropriate to the specific style of citation on a micro-level scale. More concerned with mechanical features of citation and works cited page. 
+
+16. Other 
+Please specify what other thing you are talking about. 
+
+\pagebreak
+
+#Appendix 2
+
+(4: Excellent. 3: Great. 2: Good. 1: Poor)
+
+##Part 4: This section is attempting to assign a score from 1-4 for the overall macro-level composition of the paper.  
+
+###4 Macro-Level
+Demonstrates a sophisticated awareness of the audience and their expectations. Clearly indicates purpose for communicating, achieves that purpose, and contributes to greater understanding of the topic. Persuasively supports observations or claims with skillfully chosen examples, with compelling evidence from authoritative sources, and with exhaustive reasoning. Presents ideas in a outstandingly controlled, fluid, and logical manner, both across the work and within individual paragraphs or sections.  
+
+###3 Macro-Level 
+Demonstrates a consistent awareness of the audience and their expectations. Clearly indicates purpose for communicating and achieves that purpose. Supports observations or claims with sufficient and appropriate examples, with evidence from authoritative sources, and with thorough reasoning. Presents ideas in a logical and easy to follow manner, both across the entire work and within individual paragraphs or sections. 
+
+###2 Macro-Level 
+Demonstrates inconsistent awareness of the audience and their expectations. Shows an incomplete sense of purpose or needs further work to achieve purpose successfully. 
+Supports observations or claims with insufficient or inappropriate examples, with evidence that is inadequate or does not come from authoritative sources, or with underdeveloped reasoning. 
+Does not always present ideas in a logical and easy to follow manner. Paragraphs, sections, or sentences may appear out of sequence or not relate to those immediately before and after. 
+
+###1 Macro-Level 
+Demonstrates little awareness of the audience and their expectations. Does not achieve purpose for communicating. Does not support observations or claims or provides only minimal support. Evidence is inadequate or does not come from authoritative sources and reasoning is faulty or insufficient. Does not present ideas in a logical or easy to follow manner. 
+
+##Part 5: This section is attempting to assign a score from 1-4 for the overall mid-level composition of the paper.  
+
+###4 Mid-Level 
+
+States ideas in clear, concise sentences and demonstrates a masterful and distinct control of sentence structure. Uses words skillfully and at a consistent level of diction suited to the purpose. 
+
+###3 Mid-Level
+
+States ideas in clear, concise, and varied sentences. Uses words appropriately and at a consistent level of diction suited to the purpose. 
+
+###2 Mid-Level 
+
+Demonstrates recurring problems with clarity, wordiness, or lack of variety in sentence structure. Uses some words inappropriately or at inconsistent levels of diction. 
+
+###1 Mid-Level 
+
+Demonstrates significant problems with clarity, wordiness, or lack of variety in sentence structure. Frequently uses words inappropriately or at inconsistent levels of diction. 
+
+##Part 6: This section is attempting to assign a score from 1-4 for the overall micro-level composition of the paper.  
+
+###4 Micro-Level 
+
+Demonstrates comprehensive knowledge of appropriate communication standards. Contains few if any errors in grammar, punctuation, spelling, or capitalization. For oral communication, is consistently delivered clearly and fluently. 
+
+###3 Micro-Level 
+
+Demonstrates significant knowledge of appropriate communication standards. May contain occasional errors in grammar, punctuation, spelling, or capitalization. For oral communication, is generally delivered clearly and fluently. 
+
+###2 Micro-Level 
+
+Demonstrates inconsistent knowledge of appropriate communication standards. Contains some recurring errors in grammar, punctuation, spelling, or capitalization. For oral communication, shows some problems with clarity and fluency. 
+
+###1 Micro-Level 
+
+Demonstrates little knowledge of appropriate communication standards. Contains significant and recurring errors in grammar, punctuation, spelling, or capitalization. For oral communication, shows frequent problems with clarity and fluency. 
+
+##Part 7: This is the final section of the paper that attempts to judge the overall quality of the paper as a complete product. Utilize the rubric listed below when helping you to make your determinations. 
+
+###4 Paper
+
+A 4 paper is significant in purpose and sensitive to the audience for which it is written. It presents a logical thesis, coherent structure, and paragraphs organized by a controlling idea. Transitions are effective both between and within paragraphs. Each paragraph is fully developed through analysis and examples appropriate to the thesis. Not only is the paper well supported, but the style is also clear with little awkwardness or ambiguity. Sentences show variation, and diction is sensitive and precise. Furthermore, few, if any, mechanical errors exist. The total effect is that of a fresh, personal, and provocative paper.
+
+###3 Paper
+
+The 3 paper contains some but not all the attributes of the 4 paper. This paper is also significant and well argued, but some of the arguments are not as well supported as they could be. Even though it might have some minor lapses in its reasoning, the paper still contains a worthy thesis, logical organization, and developed paragraphs with effective transitions. Generally, the sentence structure will be varied and correct, but a few mechanical errors or awkward sentences might exist. Diction will be correct but not as sensitive or sophisticated as in the 4 paper.
+
+###2 Paper
+
+The 2 paper is also organized around a thesis statement, but the thesis may not be as clearly defined as in higher quality papers. The topic expressed in the thesis may be trivial or contain assumptions which the writer never recognizes or renders palatable to the reader. The organization is obvious but possibly formulaic, and transitions may not be smooth. Although the paper focuses on a topic, it may have problems with paragraph unity, development, or adequate support. Most of the sentences are correct, but some might be choppy, repetitive, or lacking in variety.
+
+###1 Paper
+
+The 1 paper has no central idea or one that is too general to be developed. Paragraphs are not logically connected, and transitions do not generally exist. Development is inadequate with poor balance between general ideas and specific support. Sentences are often ungrammatical and word choice faulty. As a result, the paper fails to present a conscientious inquiry into a problem and seems to disregard its audience.
