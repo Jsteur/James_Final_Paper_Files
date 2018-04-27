@@ -328,14 +328,14 @@ counts4 <- data.frame(table(s15comments$Class, s15comments2$Article))
 colnames(counts4) <- c("Professor", "Article", "Frequency")
 ```
 
-```{r, results= "asis"}
+```{r, echo=FALSE, results= "asis"}
 ##Level Comments
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Level Comments",
           notes = "Class 1 N=201. Class 2 N=178.", counts3)
 
 ##Article Comments
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Article Comments",
-          notes = "Class 1 N=201. Class 2 N=178", counts4)
+          notes = "Class 1 N=201. Class 2 N=178.", counts4)
 ```
 
 
