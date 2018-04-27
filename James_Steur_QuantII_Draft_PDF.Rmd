@@ -313,27 +313,29 @@ s15comments2 %>% filter(Style!="NA" & Purpose != "NA") %>%
   theme(axis.text.x = element_text(angle=45, hjust=1), 
         plot.title = element_text(hjust=0.5))+
   scale_x_discrete(drop=FALSE)
+```
 
-
+```{r, results="hide", echo=FALSE}
 ##Level 
-counts3 <- table(s15comments$Class, s15comments2$Level)
-barplot(counts3, main="Figure 2: Frequency of Level Comments For Class 1 & 2",
-  xlab="Level of Comment", col=c("darkblue","red"),
- 	ylim=c(0,140), legend = rownames(counts3), beside=TRUE)
-rownames(counts3) <- c("Professor 1", "Professor 2")
+counts3 <- data.frame(table(s15comments$Class, s15comments2$Level))
+colnames(counts3) <- c("Professor", "Level", "Frequency")
 
 ##Article
 Table_1 <- kable(counts3, caption = "Frequency of Level Comments For Class 1 & 2")
 add_footnote(Table_1, c("Professor 1 N=201", "Professor 2 N=178"))
 
 counts4 <- data.frame(table(s15comments$Class, s15comments2$Article))
-kable(counts4)
 colnames(counts4) <- c("Professor", "Article", "Frequency")
-counts4
 ```
+
 ```{r, results= "asis"}
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Hahaha",
-          note = "N size is 5000", counts4)
+##Level Comments
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Level Comments",
+          notes = "Class 1 N=201. Class 2 N=178.", counts3)
+
+##Article Comments
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Article Comments",
+          notes = "Class 1 N=201. Class 2 N=178", counts4)
 ```
 
 
