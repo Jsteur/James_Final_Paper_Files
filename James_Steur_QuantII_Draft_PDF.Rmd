@@ -254,7 +254,7 @@ range(Class2$Macro2)
 quantile(Class2$Macro1, c(0.25, 0.75))
 quantile(Class2$Macro2, c(0.25, 0.75))
 ```
-For purposes of clarity, all means, medians, ranges, and 50% coverage intervals are for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The median scores for papers 1, 2, 3, and 4 respectively are 2, 2.5, 2, and 3.The ranges for papers 1, 2, 3, and 4  The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. 
+In summation, here are all means, ranges, and 50% coverage intervals for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The median scores for papers 1, 2, 3, and 4 respectively are 2, 2.5, 2, and 3.The ranges for papers 1, 2, 3, and 4  The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. 
 
 ##How are Professors Commenting?
 ```{r, results="hide", include=FALSE}
@@ -324,6 +324,7 @@ rownames(counts3) <- c("Professor 1", "Professor 2")
 Table_1 <- kable(counts3, caption = "Frequency of Level Comments For Class 1 & 2")
 add_footnote(Table_1, c("Professor 1 N=201", "Professor 2 N=178"))
 
+counts4 <- table(s15comments$Class, s15comments2$Article)
 kable(counts4)
 ```
 
@@ -331,6 +332,8 @@ kable(counts4)
 # **Part III** 
 
 ##Discussion
+
+
 
 [Include more description about the ways these professors were commenting on everything. Also get your graphs and contigency tables to pop up approprietly.]
 
