@@ -29,6 +29,7 @@ library(pwr)
 library(paramtest)
 library(ggplot2)
 library(kableExtra)
+library(stargazer)
 ```
 
 ```{r, include=FALSE}
@@ -186,6 +187,7 @@ perm.test(Class2$Overall1,  Class2$Overall2, paired = T, alternative = "two.side
 perm.test(Class1$Macro1,  Class1$Macro2, paired = T, alternative = "two.sided")
 perm.test(Class2$Macro1,  Class2$Macro2, paired = T, alternative = "two.sided")
 ```
+
 ```{r, results="hide", include=FALSE}
 ##Effect Size Between Classes with Hedges
 
@@ -324,8 +326,13 @@ rownames(counts3) <- c("Professor 1", "Professor 2")
 Table_1 <- kable(counts3, caption = "Frequency of Level Comments For Class 1 & 2")
 add_footnote(Table_1, c("Professor 1 N=201", "Professor 2 N=178"))
 
-counts4 <- table(s15comments$Class, s15comments2$Article)
+counts4 <- data.frame(table(s15comments$Class, s15comments2$Article))
 kable(counts4)
+colnames(counts4) <- c("Professor", "Article", "Frequency")
+counts4
+```
+```{r, results= "asis"}
+stargazer(summary=FALSE, header=FALSE, type = "latex", counts4)
 ```
 
 
