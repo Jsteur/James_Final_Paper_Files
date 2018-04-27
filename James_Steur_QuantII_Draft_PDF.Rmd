@@ -287,7 +287,7 @@ Third, Professor one made more comments that were related to big-picture feature
 Fourth, in terms of articles, professor 1 has the highest number of comments for organization, evidence, and logic and reasoning. Professor 2 had the highest number of comments for citation errors and the works cited page. 
 
 ```{r, results="hide", include=FALSE}
-##========Rewriting to be factors
+##Rewriting Factors 
 s15comments2 <- s15comments
 s15comments2$Class <- factor(s15comments2$Class, labels = c("Professor 1", "Professor 2"))
 s15comments2$Style <- factor(s15comments2$Style, labels = c("Directive", "Nondirective", "Corrective", "Evaluative"))
@@ -302,7 +302,7 @@ s15comments2$Article <- factor(s15comments2$Article, labels = c("Thesis",
 ```
 
 ```{r, echo=FALSE}
-##=====Try making widths of histogram the same. 
+#
 
 s15comments2 %>% filter(Style!="NA" & Purpose != "NA") %>%
   ggplot(aes(Style, fill=Purpose))+
