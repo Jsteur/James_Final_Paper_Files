@@ -8,7 +8,6 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
 ```
 
 # Abstract 
@@ -29,6 +28,7 @@ library(doParallel)
 library(pwr)
 library(paramtest)
 library(ggplot2)
+library(kableExtra)
 ```
 
 ```{r, include=FALSE}
@@ -135,10 +135,10 @@ cohen.d(s15students$Macro2,s15students$Macro1,pooled=TRUE,paired=TRUE,
 ```
 I found an effect size of 0.71 for overall and an effect size of 0.61. Given my small sample size, these effect sizes are fairly large. This means that students appear to be improving at a meaningful rate!
 
-====In this next section, I will calculate the error rate for my overall and macro level outcomes variables. I'm still working on this at this point, but this process should also show that my findings are even more robust. >:(. I wish the R code worked. 
+Since I selected my alpha value to be 0.05, the error rate for my overall and macro level outcomes varaible is 5%. That is, I have a 5% chance of committing a type I error and showing a false-positve from my data. 
 
 After I calculated the error rate, I decided to calculate the power rate of my overall and macro level outcome variables. The power rate is going to assess the probability of me making a type II error given the size of my data set.
-```{r}
+```{r, results="hide", include=FALSE}
 ##Power for overall comparison
 plot.power.htest(pwr.t.test(n=26, d=0.7188, sig.level = 0.05, power=NULL))
 
@@ -170,7 +170,7 @@ results(power_ttest) %>%
 ```
 What does all of this analysis actually say about students learning how to write? The bottom line is that students appear to be learning how to write better from their classes. Since we see an average shift of 0.5 in the mean difference for comments, this means that most students started out at a "B" level of writing in this class, and they ended up improving with a final paper grade of "B+" or "A-." This is a huge shift in learning for one semester! Simply showing that students are learning how to write from professors comments is an important milestone, but I'm also interested in seeing if one professors' style of commenting resulted in greater improvement for certain students.
 
-```{r}
+```{r, results="hide", include=FALSE}
 #Class Specific T-Tests
 t.test(Class1$Overall2, Class1$Overall1, paired = TRUE, alternative = "two.sided")
 t.test(Class2$Overall2, Class2$Overall1, paired = TRUE, alternative = "two.sided")
@@ -216,7 +216,7 @@ cohen.d(Class2$Macro2,Class2$Macro1,pooled=TRUE,paired=TRUE,
 
 This isn't good! After I ran my permutation test, it appears that I fail to reject the null hypothesis in most cases! This is most likely due to the smaller sample sizes. Let's check the power of my new subsamples to see if there could be a problem there. 
 
-```{r}
+```{r, results="hide", include=FALSE}
 pwr.t.test(n=16, d=0.6674, sig.level = 0.05, power=NULL)
 pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 pwr.t.test(n=16, d=0.524, sig.level = 0.05, power=NULL)
@@ -224,7 +224,6 @@ pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 ```
 Oh boy. This is not good. It appears that I have very lower power rates. This is unfortunate. It's highly possible that some type of effect is occuring with these students, but the sample size is so small that I'm not detecting any effect. I do detect an effect for overall improvement with paper 1. This could suggest that professor 1 is giving comments which are indicating greater improvement in the overall papers, and professor 2 is giving comments that are resulting in less improvement in a statistically signficant way. However, given my low power rates it's highly possible there is an effect going on with the second batch of students. 
 
-##How are Professors Commenting?
 ```{r, results="hide", include=FALSE}
 #Means, Medians, Range, & 50% coverage intervals For Overall First Paper & Second Paper 
 mean(Class1$Overall1)
@@ -257,23 +256,9 @@ quantile(Class2$Macro2, c(0.25, 0.75))
 ```
 For purposes of clarity, all means, medians, ranges, and 50% coverage intervals are for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The median scores for papers 1, 2, 3, and 4 respectively are 2, 2.5, 2, and 3.The ranges for papers 1, 2, 3, and 4  The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. 
 
-```{r}
+##How are Professors Commenting?
+```{r, results="hide", include=FALSE}
 #Summarize Variables of Interest 
-
-##Barplots
-
-##Purpose
-#====5 & 6 are NA's. Need to remove. 
-counts1 <- table(s15comments$Class, s15comments$Purpose)
-barplot(counts1, main="Frequency of Purpose Comments For Class 1 & 2",
-  xlab="Purpose of Commenting", col=c("darkblue","red"),
- 	ylim=c(0,100), legend = rownames(counts1), beside=TRUE)
-
-##Style 
-counts2 <- table(s15comments$Class, s15comments$Style)
-barplot(counts2, main="Frequency of Style Comments For Class 1 & 2",
-  xlab="Style of Commenting", col=c("darkblue","red"),
- 	ylim=c(0,120), legend = rownames(counts2), beside=TRUE)
 
 ##Level 
 counts3 <- table(s15comments$Class, s15comments$Level)
@@ -287,11 +272,9 @@ barplot(counts4, main="Frequency of Article Comments For Class 1 & 2",
   xlab="Level of Commenting", col=c("darkblue","red"),
  	ylim=c(0,40), legend = rownames(counts4), beside=TRUE)
 
-curve(qt(.975,x), from = 2 , to = 100, ylab = "Quantile 0.975 ", xlab = "Degrees of freedom", main = "Student t distribution")
-abline(h=qnorm(.975), col = 2)
 ```
 
-When creating my barplots, I was unable to change the legend for all of them--I'll work on fixing this later. [I had ggplot graphics, but they aren't working. >:(. I'll talk to Ekrem or Lula later. So frustrating. Instead of having "1" on the x-axis, it should be listing the corresponding type of comment/style listed in the appendix.] The blue #1 respresents the first class and the red #2 represents the second class. I will also work on fixing the legend for the last graph I present. So far, this is solely descriptive analysis across four different variables of interest that function as a type of treatment. This analysis fuses paper 1 & 2 as well as paper 3 & 4. This is simply meant to demonstrate the most common approaches that both professors took in making comments about their papers. 
+The blue #1 respresents the first class and the red #2 represents the second class. So far, I have summarized four different variables of interest that function as a type of treatment. The subsequent analysis fuses paper 1 & 2 together as well as paper 3 & 4. This is simply meant to demonstrate the most common approaches that both professors took in making comments on their papers.
 
 To begin, there is is a noticeable difference in the primary way that professor one and two comment in terms of their purpose. Professor one has a high frequency of praising their students work. Professor two has a high frequency of advising by giving general feedback but not making any sort of correction. Both professors had an equal level of problem detecting. 
 
@@ -301,43 +284,47 @@ Third, Professor one made more comments that were related to big-picture feature
 
 Fourth, in terms of articles, professor 1 has the highest number of comments for organization, evidence, and logic and reasoning. Professor 2 had the highest number of comments for citation errors and the works cited page. 
 
-```{r}
+```{r, results="hide", include=FALSE}
 ##========Rewriting to be factors
 s15comments2 <- s15comments
 s15comments2$Class <- factor(s15comments2$Class, labels = c("Professor 1", "Professor 2"))
 s15comments2$Style <- factor(s15comments2$Style, labels = c("Directive", "Nondirective", "Corrective", "Evaluative"))
 s15comments2$Purpose <- factor(s15comments2$Purpose, labels = c("Problem Detecting",
             "Advising", "Editing", "Praising", "Describing", "Topical Commenting"))
-counts <- as.matrix(temp1$TotStyle1, temp1$TotStyle2, temp1$TotStyle3, temp1$TotStyle4)
-class(counts)
-barplot(counts, main="Car Distribution by Gears and VS",
-  xlab="Number of Gears", col=c("darkblue","red", "green", "blue"),
- 	legend = rownames(counts), beside=TRUE)
-ggplot(s15comments, aes(Style, fill=as.factor(Purpose)))+geom_bar(position="dodge")
 
+s15comments2$Level <- factor(s15comments2$Level, labels = c("Micro",
+            "Mid", "Macro"))
+
+s15comments2$Article <- factor(s15comments2$Article, labels = c("Thesis",
+            "Organization", "Evidence", "Thoroughness of Discussion", "Logic and Reasoning", "Syntax", "Transitions", "Topic Sentences", "Sentence Conciseness", "Grammar", "Punctuation", "Spelling", "Word Choice", "Capitalization", "Citation/Works Cited Page"))
+```
+
+```{r, echo=FALSE}
 ##=====Try making widths of histogram the same. 
 
 s15comments2 %>% filter(Style!="NA" & Purpose != "NA") %>%
   ggplot(aes(Style, fill=Purpose))+
   geom_bar(position="dodge")+
   facet_wrap(~Class, ncol=2)+
-  ggtitle("Overall Professor Comments")+
+  ggtitle("Figure 1: Overall Professor Comments")+
   theme_bw()+
   theme(axis.text.x = element_text(angle=45, hjust=1), 
         plot.title = element_text(hjust=0.5))+
   scale_x_discrete(drop=FALSE)
 
-s15comments2 %>% filter(Style!="NA" & Purpose != "NA") %>%
-  group_by(Class,Purpose) %>%
-  count(Style) %>% 
-  ggplot(aes(Style, n, fill=Purpose))+
-  geom_col(position="dodge")+
-  facet_wrap(~Class, ncol=2)+
-  ggtitle("Overall Professor Comments")+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle=45, hjust=1), 
-        plot.title = element_text(hjust=0.5))+
-  scale_x_discrete(drop=FALSE)
+
+##Level 
+counts3 <- table(s15comments$Class, s15comments2$Level)
+barplot(counts3, main="Figure 2: Frequency of Level Comments For Class 1 & 2",
+  xlab="Level of Comment", col=c("darkblue","red"),
+ 	ylim=c(0,140), legend = rownames(counts3), beside=TRUE)
+rownames(counts3) <- c("Professor 1", "Professor 2")
+
+##Article
+Table_1 <- kable(counts3, caption = "Frequency of Level Comments For Class 1 & 2")
+add_footnote(Table_1, c("Professor 1 N=201", "Professor 2 N=178"))
+
+kable(counts4)
 ```
 
 
