@@ -332,7 +332,8 @@ colnames(counts4) <- c("Professor", "Article", "Frequency")
 counts4
 ```
 ```{r, results= "asis"}
-stargazer(summary=FALSE, header=FALSE, type = "latex", counts4)
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Hahaha",
+          note = "N size is 5000", counts4)
 ```
 
 
