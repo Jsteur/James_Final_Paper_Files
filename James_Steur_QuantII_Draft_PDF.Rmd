@@ -105,6 +105,12 @@ After conducting the paired sample t-test, I fail to reject the null hypothesis 
 
 For my macro and overall outcome variables, I reject the null hypothesis. The paired sample t-test found *p* values of 0.001 and 0.005 for the overall and macro outcome variables respectively. It could be possible that I commit a type I error and falsey fail to reject the null hypothesis, but it appears there is a statistically significant relationship between overall and macro-level improvement for student papers. In practical terms, this means it is likely that professors comments on students papers are improving students' ability in organizing their papers and producing overall better writing. The improvements we see from students' overall and macro level aspects of their papers are most likely due to professors commenting on their papers. In the end, there is evidence that suggests teachers' comments on student writing appear to produce quantifiable student learning.  
 
+```{r, echo=FALSE, results="asis"}
+##Table 1====Figure out how to get rid of first column and dots in titles.
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample               T-Test 1",notes = "DF=25. Two-tailed test.", Table_1)
+```
+
+
 But, this is only one p-value for both outcome variables overall and micro. I want to be especially cautious and run a permutation test of all my different variables. Why am I running a permutation based test? The permutation test is a nonparametric way to test for differences between my samples. One advantage to this approach is that I do not need to assume the type of distribution my data follows. If the data did not follow a normal distribution, and I conducted my analysis the results could be confounded by this initial assumption. The second advantage of this approach is that I test all possible combinitations of my control and treatment groups with my given data, so I can be more confident that the effects I see are not due to chance. [Need to include more explanation of permutation based testing.]
 ```{r, results="hide", include=FALSE}
 #Paired Permutation Test with Package
@@ -121,6 +127,11 @@ for(i in seq_len(25) + 1) {
 ## two sided
 sum(nullR >= abs(nullR[1])) / length(nullR)
 ```
+
+```{r, echo=FALSE, results="asis"}
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample T-Test 2",notes = "DF=25. Two-tailed test.", Table_2)
+```
+
 After running the permutation test for my varibles overall and macro, I found a p-value of 0.004 for overall and 0.01 for macro level, so I reject the null hypotheses. These results suggest that students are improving the quality of their overall papers, and these effects are most likely not due to chance. After running the paired sample t-test and permutation test, it is still possible that I am commiting a type I error and the effects we see in student improvement are false positives. However, running both tests gives me more confidence that I am less likely to comit a type I error with my data. 
 
 P-values can be deceptive though! A p-value alone does indicate evidence against our null hypothesis, but it doesn't tell us anything about the effect size we observe. A p-value, after all, doesn't capture the effect size of my variables. So, what are the effect sizes for overall and macro? In order to calculate the effect sizes of my outcomes varaibles, I decided to find Cohen's d. One reason I decided to use Cohen's d was to calculate the effect sizes from the difference in means between the students' first and second papers. [Need to include more discussion of Cohen's d here.]
@@ -186,8 +197,8 @@ t.test(Class2$Macro2, Class2$Macro1, paired = TRUE, alternative = "two.sided")
 ```
 Even with our small sample sizes, it appears that we are detecting an interesting effect. The p-values for all of these different values are different. We are still finding some statistically significant results. [Write down actual p-values or put them in a table in final paper.]
 
-```{r}
-Table_1_Jake
+```{r, echo=FALSE, results="asis"}
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test 1",notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_3)
 ```
 
 
@@ -236,6 +247,11 @@ pwr.t.test(n=16, d=0.524, sig.level = 0.05, power=NULL)
 pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 ```
 Oh boy. This is not good. It appears that I have very lower power rates. This is unfortunate. It's highly possible that some type of effect is occuring with these students, but the sample size is so small that I'm not detecting any effect. I do detect an effect for overall improvement with paper 1. This could suggest that professor 1 is giving comments which are indicating greater improvement in the overall papers, and professor 2 is giving comments that are resulting in less improvement in a statistically signficant way. However, given my low power rates it's highly possible there is an effect going on with the second batch of students. 
+
+```{r}
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test 2",notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
+```
+
 
 ```{r, results="hide", include=FALSE}
 #Means, Medians, Range, & 50% coverage intervals For Overall First Paper & Second Paper 
