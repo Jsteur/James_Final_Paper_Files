@@ -320,14 +320,14 @@ colnames(Macro_Table) <-c("Means", "Ranges", "50% Coverage Intervals")
 ```
 
 ```{r, echo=FALSE, results="asis"}
-##Summarize Variables of Interest. ##Why broken?
+##Summarize Variables of Interest.
 
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Overall Means, Ranges, and Coverage Intervals", notes = "Paper 1 and 2=Professor 1. Paper 3 and 4=Professor 2 ", Overall_Table)
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Overall Means, Ranges, and Coverage Intervals", notes = "Paper 1 and 2=Professor 1. Paper 3 and 4=Professor 2.", Overall_Table)
 ```
 ```{r, echo=FALSE, results="asis"}
-##Summarize Variables of Interest. ##Why broken?
+##Summarize Variables of Interest.
 
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Overall Means, Ranges, and Coverage Intervals", notes = "Paper 1 and 2=Professor 1. Paper 3 and 4=Professor 2 ", Macro_Table)
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Overall Means, Ranges, and Coverage Intervals", notes = "Paper 1 and 2=Professor 1. Paper 3 and 4=Professor 2.", Macro_Table)
 ```
 
 
