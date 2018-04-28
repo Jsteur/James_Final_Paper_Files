@@ -114,6 +114,7 @@ For my macro and overall outcome variables, I reject the null hypothesis. The pa
 
 ```{r, echo=FALSE, results="asis"}
 ##Table 1====Figure out how to get rid of first column and dots in titles.
+colnames(Table_1) <- c("Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample               T-Test 1",notes = "DF=25. Two-tailed test.", Table_1)
 ```
 But, this is only one p-value for my outcome variables overall and macro. I want to be especially cautious and run a permutation test of all my different variables. The permutation test creates the sampling distribution by resampling different observations of the data. More specifically, I can actually assign different outcome values to each observation while keeping the observed outcomes of my data. When conducting a permutation test, the null hypothesis states that the treatment groups are not different on the dependent variable. By permuting all the different outcome values, I can see every combination of the possible alternative treatment conditions. Moreover, I can also see the difference in means for my observed data and see these difference in means in comparison to all the differences if the outcome was independent of the treatment. Put differently, I calculate all possible values of my test statistic by permuting all different combinations of my control and treatment groups. 
@@ -378,8 +379,8 @@ counts3 <- data.frame(table(s15comments$Class, s15comments2$Level))
 colnames(counts3) <- c("Professor", "Level", "Frequency")
 
 ##Article
-Table_1 <- kable(counts3, caption = "Frequency of Level Comments For Class 1 & 2")
-add_footnote(Table_1, c("Professor 1 N=201", "Professor 2 N=178"))
+Table_99 <- kable(counts3, caption = "Frequency of Level Comments For Class 1 & 2")
+add_footnote(Table_99, c("Professor 1 N=201", "Professor 2 N=178"))
 
 counts4 <- data.frame(table(s15comments$Class, s15comments2$Article))
 colnames(counts4) <- c("Professor", "Article", "Frequency")
@@ -387,6 +388,7 @@ colnames(counts4) <- c("Professor", "Article", "Frequency")
 
 ```{r, echo=FALSE, results= "asis"}
 ##Level Comments
+
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Level Comments",
           notes = "Class 1 N=201. Class 2 N=178.", counts3)
 
