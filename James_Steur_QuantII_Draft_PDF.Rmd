@@ -116,8 +116,11 @@ For my macro and overall outcome variables, I reject the null hypothesis. The pa
 ##Table 1====Figure out how to get rid of first column and dots in titles.
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample               T-Test 1",notes = "DF=25. Two-tailed test.", Table_1)
 ```
+##Rework description of permutation based test. 
+But, this is only one p-value for my outcome variables overall and macro. I want to be especially cautious and run a permutation test of all my different variables. The permutation test creates the sampling distribution by resampling different observations of the data. More specifically, I can actually assign different outcome values to each observation while keeping the observed outcomes of my data. When I shuffle these different outcomes values, I do not replace the different values. Permutation tests are especially helpful when a treatment is provided between groups. The permutation test represents the null hypothesis that the treatment groups are not different on the dependent variable. By permuting all the different outcome values, I can see every combination of the possible alternative treatment conditions and see where the difference in means for my observed data falls relative to all of the differences we could have seen if the outcome was independent of treatment assignment.
 
-But, this is only one p-value for my outcome variables overall and macro. I want to be especially cautious and run a permutation test of all my different variables. A permutation test gives a simple way to compute the sampling distribution for any test statistic, under the strong null hypothesis that a set of genetic variants has absolutely no effect on the outcome. 
+
+A permutation test computes the sampling distribution for any test statistic, under the strong null hypothesis that a set of genetic variants has absolutely no effect on the outcome. 
 To estimate the sampling distribution of the test statistic we
 need many samples generated under the strong null hypothesis.
 If the null hypothesis is true, changing the exposure would have
@@ -128,8 +131,8 @@ like the real data, otherwise they should look different from the
 real data.
 The ranking of the real test statistic among the shuffled test
 statistics gives a p-value
-The permutation test creates the sampling distribution by resampling different observations of the data. More specifically, I can actually assign different outcome values to each observation while keeping the observed outcomes of my data. When I shuffle these different outcomes values, I do not replace the different values. Permutation tests are especially helpful when a treatment is provided between groups. The permutation test represents the null hypothesis that the treatment groups are not different on the dependent variable. By permuting all the different outcome values, I can see every combination of the possible alternative treatment conditions and see where the difference in means for my observed data falls relative to all of the differences we could have seen if the outcome was independent of treatment assignment. 
-A permutation test (also called a randomization test, re-randomization test, or an exact test) is a type of statistical significance test in which the distribution of the test statistic under the null hypothesis is obtained by calculating all possible values of the test statistic under rearrangements of the labels on the observed data points. In other words, the method by which treatments are allocated to subjects in an experimental design is mirrored in the analysis of that design. If the labels are exchangeable under the null hypothesis, then the resulting tests yield exact significance levels; see also exchangeability. Confidence intervals can then be derived from the tests. The theory has evolved from the works of Ronald Fisher and E. J. G. Pitman in the 1930s.
+ 
+A permutation test (also called a randomization test, re-randomization test, or an exact test) is a type of statistical significance test in which the distribution of the test statistic under the null hypothesis is obtained by calculating all possible values of the test statistic under rearrangements of the labels on the observed data points. In other words, the method by which treatments are allocated to subjects in an experimental design is mirrored in the analysis of that design. If the labels are exchangeable under the null hypothesis, then the resulting tests yield exact significance levels; see also exchangeability. Confidence intervals can then be derived from the tests. 
 
 To illustrate the basic idea of a permutation test, suppose we have two groups {\displaystyle A} A and {\displaystyle B} B whose sample means are {\displaystyle {\bar {x}}_{A}} \bar{x}_{A} and {\displaystyle {\bar {x}}_{B}} \bar{x}_{B}, and that we want to test, at 5% significance level, whether they come from the same distribution. Let {\displaystyle n_{A}} n_{A} and {\displaystyle n_{B}} n_{B} be the sample size corresponding to each group. The permutation test is designed to determine whether the observed difference between the sample means is large enough to reject the null hypothesis H {\displaystyle _{0}} _{0} that the two groups have identical probability distributions.
 
@@ -337,7 +340,7 @@ colnames(Macro_Table) <-c("Means", "Ranges", "50% Coverage Intervals")
 
 Macro_Table
 ```
-In summation, here are all means, ranges, and 50% coverage intervals for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-3, 2-4, 1-3, and 1-3 respectivley. The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. For macro quality of the paper, the mean scores for papers 1, 2, 3, and 4 respectively are 2.25, 2.69, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-4, 2-4, 1-3, and 1-3. The 50% coverage interval for 
+In summation, look at table X and Y for a summary of all the scores.  here are all means, ranges, and 50% coverage intervals for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-3, 2-4, 1-3, and 1-3 respectivley. The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. For macro quality of the paper, the mean scores for papers 1, 2, 3, and 4 respectively are 2.25, 2.69, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-4, 2-4, 1-3, and 1-3. The 50% coverage interval for 
 
 ##How are Professors Commenting?
 ```{r, results="hide", include=FALSE}
@@ -355,8 +358,6 @@ barplot(counts4, main="Frequency of Article Comments For Class 1 & 2",
   xlab="Level of Commenting", col=c("darkblue","red"),
  	ylim=c(0,40), legend = rownames(counts4), beside=TRUE)
 ```
-
-The blue #1 respresents the first class and the red #2 represents the second class. So far, I have summarized four different variables of interest that function as a type of treatment. The subsequent analysis fuses paper 1 & 2 together as well as paper 3 & 4. This is simply meant to demonstrate the most common approaches that both professors took in making comments on their papers.
 
 To begin, there is is a noticeable difference in the primary way that professor one and two comment in terms of their purpose. Professor one has a high frequency of praising their students work. Professor two has a high frequency of advising by giving general feedback but not making any sort of correction. Both professors had an equal level of problem detecting. 
 
