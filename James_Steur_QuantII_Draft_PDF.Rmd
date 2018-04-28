@@ -330,11 +330,11 @@ colnames(counts4) <- c("Professor", "Article", "Frequency")
 
 ```{r, echo=FALSE, results= "asis"}
 ##Level Comments
-stargazer(summary=FALSE, header=FALSE, row.names = F, type = "latex", title = "Frequency of Level Comments",
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Level Comments",
           notes = "Class 1 N=201. Class 2 N=178.", counts3)
 
 ##Article Comments
-stargazer(summary=FALSE, header=FALSE, row.names = F, type = "latex", title = "Frequency of Article Comments",
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Article Comments",
           notes = "Class 1 N=201. Class 2 N=178.", counts4)
 ```
 
