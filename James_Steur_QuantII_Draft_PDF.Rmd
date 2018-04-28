@@ -33,10 +33,16 @@ library(stargazer)
 ```
 
 ```{r, include=FALSE}
-#Load Data & 
+#Load Data 
 require(RCurl)
 s15comments <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Summer_2015_comments_final.csv"))
 s15students <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Summer_2015_students_final.csv"))
+Table_1 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_1_Jake.csv"))
+Table_2 <- read.csv(text=getURL("https://github.com/Jsteur/James_Final_Paper_Files/blob/master/Table_2_Jake.csv"))
+Table_3 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_3_Jake.csv"))
+Table_4 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_4_Jake.csv"))
+
+#Cleanup Data
 Class1 <- subset(s15students, Class ==1)
 Class2 <- subset(s15students, Class ==2)
 temp1<-ddply(s15comments,.(Class,Paper,Student),summarize,TotStyle1=length(Style==1),
@@ -179,6 +185,11 @@ t.test(Class1$Macro2, Class1$Macro1, paired = TRUE, alternative = "two.sided")
 t.test(Class2$Macro2, Class2$Macro1, paired = TRUE, alternative = "two.sided")
 ```
 Even with our small sample sizes, it appears that we are detecting an interesting effect. The p-values for all of these different values are different. We are still finding some statistically significant results. [Write down actual p-values or put them in a table in final paper.]
+
+```{r}
+Table_1_Jake
+```
+
 
 ```{r, results="hide", include=FALSE}
 ##Permutation Test Between Classes
