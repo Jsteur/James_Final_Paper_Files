@@ -162,7 +162,7 @@ After running the two-tailed paired sample permutation test for my varibles over
 
 P-values can be deceptive though! A p-value indicates evidence against our null hypothesis, but it doesn't tell us anything about the effect size we observe. We want to know the effect size because it tells us abou the strength of the association between varaibles.  A p-value, after all, doesn't capture the effect size of my variables. So, what are the effect sizes for overall and macro? In order to calculate the effect sizes of my outcomes varaibles, I decided to calculate Cohen's d. For independent t-tests, Cohen's d is found by simply calculating the mean difference between groups and dividing your answer by the pooled standard deviation. One reason I decided to use Cohen's d was to calculate the effect sizes from the difference in means between the students' first and second papers. A second reason I chose to use Cohens d is that it assumes the variences of the populations are equal, which my design follows through with. Third, sample sizes of 20 are usually large enought to biased effect sizes, so I should be ok calculating this value. 
 
-
+Conventionally, an effect size of 0.8 is considered large, 0.5 is medium, and 0.2 is small. Put differently, seeing an effect size of 0.2 is usually something you can only see with careful study, whereas an effect size of 0.8 is high enough for someone to see the effects with the naked eye. The effect size largely depends on context. For example, seeing an effect size of 0.2 may usually be considered small, but it may be large if the effect is observed in preventing suicide. Context and expertise is important when interpreting the different effect sizes. 
 
 ```{r, results="hide", include=FALSE}
 #Effect size with package
@@ -179,8 +179,7 @@ cohen.d(s15students$Macro2,s15students$Macro1,pooled=TRUE,paired=TRUE,
                        conf.level=0.95,noncentral=FALSE)
 ##Cohen’s d and Hedges’ g are interpreted in a similar way. Cohen suggested using the following rule of thumb for interpreting results: Use Cohen when n > 20 and Hedge when n < 20
 ```
-I found an effect size of 0.71 for overall and an effect size of 0.61. Given my small sample size, these effect sizes are fairly large. This means that students appear to be improving at a meaningful rate!
-
+I found an effect size of 0.71 for overall and 0.61 for macro. Given my small sample size, these effect sizes are fairly large. This means that students appear to be improving at a meaningful rate with their writing abilities by the end of the semester. These effect sizes indicate that students are learning over the course of the semetser and end up producing "better" quality work. 
 Since I selected my alpha value to be 0.05, the error rate for my overall and macro level outcomes varaible is 5%. That is, I have a 5% chance of committing a type I error and showing a false-positve from my data. 
 
 After I calculated the error rate, I decided to calculate the power rate of my overall and macro level outcome variables. The power rate is going to assess the probability of me making a type II error given the size of my data set. The three factors that influence power are my alpha value, effect size, and sample size that I use to detect the effect size. In order to be especially cautious, I ran 1000 different simulations of my data and found each of those power rates. Afterwards, I took the mean of all my power rates. Rather than just run one simulation, running 1000 gives me more confidence that my power rate is more likely to be accurate. 
