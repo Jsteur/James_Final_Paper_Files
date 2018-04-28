@@ -166,8 +166,11 @@ plot.power.htest(pwr.t.test(n=26, d=.6068, sig.level = 0.05, power=NULL))
 ```
 I found a power rate of 0.72 for macro and 0.61 for macro. Overall, given my small sample sizes, these power rates aren't too bad. We, of course, want higher power if possible, but with a sample size of 26 this is pretty good. Ideally, I would want power around 0.8, these are still fairly good powers. This means that I most likely did not falsely reject the null hypothesis. [Talk more about how you performed power calculation and the underlying assumptions here--justify! You ran a 1000 simulations of the data to make sure you were being cautious.]
 
-#==Fix later.
-stargazer(summary=FALSE, header=FALSE, float.env = "sidewaystable", type = "latex", title = "Pooled Classes Paired Sample T-Test 2",notes = "DF=25. Two-tailed test.", Table_2)
+##Problem
+=========stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample T-Test 2",notes = "DF=25. Two-tailed test.", Table_2)
+```
+
+
 ```{r, results="hide", include=FALSE}
 # create user-defined function to generate and analyze data
 #simNum
