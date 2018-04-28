@@ -40,7 +40,7 @@ require(RCurl)
 s15comments <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Summer_2015_comments_final.csv"))
 s15students <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Summer_2015_students_final.csv"))
 Table_1 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_1_Jake.csv"))
-Table_2 <- read.csv(text=getURL("https://github.com/Jsteur/James_Final_Paper_Files/blob/master/Table_2_Jake.csv"))
+Table_2 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_2_Jake.csv"))
 Table_3 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_3_Jake.csv"))
 Table_4 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_4_Jake.csv"))
 
@@ -113,7 +113,7 @@ After conducting the two-tailed paired sample t-test, I fail to reject the null 
 For my macro and overall outcome variables, I reject the null hypothesis. The paired sample t-test found *p* values of 0.001 and 0.005 for the overall and macro outcome variables respectively. It could be possible that I commit a type I error and falsey fail to reject the null hypothesis, but it appears there is a statistically significant relationship between overall and macro-level improvement for student papers. In practical terms, this means it is likely that professors comments on students papers are improving students' ability in organizing their papers and producing overall better writing. The improvements we see from students' overall and macro level aspects of their papers are most likely due to professors commenting on their papers. In the end, there is evidence that suggests teachers' comments on student writing appear to produce quantifiable student learning.  
 
 ```{r, echo=FALSE, results="asis"}
-##Table 1====Figure out how to get rid of first column and dots in titles.
+##Table 1
 colnames(Table_1) <- c("Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample               T-Test 1",notes = "DF=25. Two-tailed test.", Table_1)
 ```
@@ -173,9 +173,11 @@ plot.power.htest(pwr.t.test(n=26, d=.6068, sig.level = 0.05, power=NULL))
 ```
 I found a power rate of 0.72 for macro and 0.61 for macro after taking the average of all my simulations. Overall, given my small sample sizes, these power rates aren't too bad. We, of course, want higher power if possible, but with a sample size of 26 this is pretty good. Ideally, I would want power around 0.8, these are still fairly good powers. This means that I most likely did not falsely reject the null hypothesis. [Talk more about how you performed power calculation and the underlying assumptions here--justify! You ran a 1000 simulations of the data to make sure you were being cautious.]
 
-##Problem
-=========stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample T-Test 2",notes = "DF=25. Two-tailed test.", Table_2)
-
+```{r, echo=FALSE, results="asis"}
+##Table 2
+colnames(Table_2) <- c("Level", "95% CI", "Permutation p-value", "Cohen's d", "Error Rate", "Power") 
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample               T-Test 1",notes = "DF=25. Two-tailed test.", Table_2)
+```
 
 ```{r, results="hide", include=FALSE}
 # create user-defined function to generate and analyze data
@@ -211,6 +213,7 @@ t.test(Class2$Macro2, Class2$Macro1, paired = TRUE, alternative = "two.sided")
 Even with our small sample sizes, it appears that we are detecting an interesting effect. The p-values for all of these different values are different. We are still finding some statistically significant results. [Write down actual p-values or put them in a table in final paper.]
 
 ```{r, echo=FALSE, results="asis"}
+colnames(Table_3) <- c("Class & Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test 1",notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_3)
 ```
 
@@ -261,6 +264,7 @@ pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 Oh boy. This is not good. It appears that I have very lower power rates. This is unfortunate. It's highly possible that some type of effect is occuring with these students, but the sample size is so small that I'm not detecting any effect. I do detect an effect for overall improvement with paper 1. This could suggest that professor 1 is giving comments which are indicating greater improvement in the overall papers, and professor 2 is giving comments that are resulting in less improvement in a statistically signficant way. However, given my low power rates it's highly possible there is an effect going on with the second batch of students. 
 
 ```{r, echo=FALSE, results="asis"}
+colnames(Table_4) <- c("Level", "95% CI", "Permutation p-value", "Cohen's d", "Error Rate", "Power") 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test 2", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
 ```
 
