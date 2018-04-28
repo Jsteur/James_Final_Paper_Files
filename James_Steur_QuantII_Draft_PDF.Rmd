@@ -92,7 +92,7 @@ The popultation of interest in this study is first year undergraduate college st
 
 My analysis hopes to show some improvement in students' writing ability, so I calculated the overall means for all of the students' first papers. The evaluation of all students' papers included four outcome varabiles: the micro, mid, macro, and overall quality of their papers. I scaled each of these variables from 1 (poor) to 4 (excellent). (See Appendix 2 for a more specific breakdown of the evaluation rubric.)  Then, I decided to calculate the means of the students' second papers and look at the average difference in the means after the treatment, or professors written comments, were provided. Given my research question, I used a paired-sample t-test. At the end of the day, I want to compare two group means--the outcome variables for the first and last paper that students submit--and see the difference between them. The larger the difference in means for the overall group, the more improvement the students show. Given my small sample size of n=26, the paired sample t-test also increases statistical power. By using a "repeated measures" test that compares differences within subjects, I am less likely to falsely reject the null hypothesis. 
 
-Since I am interested in the differences between the two group means, I decided to conduct a paired sample t-test with alpha=0.05. There are six primary assumptions of the paired sample t-test. For purposes of clarity, I outline each assumption and explain how my design addresses each of these assumptions. 
+Since I am interested in the differences between the two group means, I decided to conduct a paired sample t-test with alpha=0.05. I selected this alpha to ensure that there is only a 5% chance of commiting a type I error. There are six primary assumptions of the paired sample t-test. For purposes of clarity, I outline each assumption and explain how my design addresses each of these assumptions. 
 1). The observations are independent of one another. For this paper, I define observations as the differences between two different sets of values. In my design, I  measure the performance of a sample of students before and after written comments are provided. Then, I analyze the difference using a paired sample t-test. As a result, it is reasonable for me to assume that the students in the design are independent of one another. In human speak, this simply means that one students overall score on a paper does not influence another student's overall score. That is, students are not influencing each other's improvement between papers since they are not the ones writing comments for one another. 
 2). The independent variable(s) should have two groups that are related to one another or function as "matched pairs." This simply means the same subjects are present in both groups. In my study, all students in both groups have been measured on the same dependent varaible at two different times: at the start and end of their class. 
 3). The dependent variable is measured on an interval or ratio scale. My dependent variables, the macro, mid, micro, and overall quality of the papers are all interval. The intervals between each of the numbers represent real equal differences in different dimensions of the papers. Put differently, the intervals between the values from 1-4 are meaningful. Moreover, the differences between the different categoreis has a consistent meaning with my measurment tool (see Appendix  4). The dependent variable should not include outliers. In my dataset, there are no outliers in the dependent varaible. All students received similar scores to one another.  
@@ -162,6 +162,8 @@ After running the two-tailed paired sample permutation test for my varibles over
 
 P-values can be deceptive though! A p-value indicates evidence against our null hypothesis, but it doesn't tell us anything about the effect size we observe. We want to know the effect size because it tells us abou the strength of the association between varaibles.  A p-value, after all, doesn't capture the effect size of my variables. So, what are the effect sizes for overall and macro? In order to calculate the effect sizes of my outcomes varaibles, I decided to calculate Cohen's d. For independent t-tests, Cohen's d is found by simply calculating the mean difference between groups and dividing your answer by the pooled standard deviation. One reason I decided to use Cohen's d was to calculate the effect sizes from the difference in means between the students' first and second papers. A second reason I chose to use Cohens d is that it assumes the variences of the populations are equal, which my design follows through with. Third, sample sizes of 20 are usually large enought to biased effect sizes, so I should be ok calculating this value. 
 
+Both Cohen's d and Hedges' g pool variances on the assumption of equal population variances, but g pools using n - 1 for each sample instead of n, which provides a better estimate, especially the smaller the sample sizes.
+
 ```{r, results="hide", include=FALSE}
 #Effect size with package
 res = cliff.delta(s15students$Overall1,s15students$Overall2,return.dm=TRUE)
@@ -181,7 +183,8 @@ I found an effect size of 0.71 for overall and an effect size of 0.61. Given my 
 
 Since I selected my alpha value to be 0.05, the error rate for my overall and macro level outcomes varaible is 5%. That is, I have a 5% chance of committing a type I error and showing a false-positve from my data. 
 
-After I calculated the error rate, I decided to calculate the power rate of my overall and macro level outcome variables. The power rate is going to assess the probability of me making a type II error given the size of my data set.
+After I calculated the error rate, I decided to calculate the power rate of my overall and macro level outcome variables. The power rate is going to assess the probability of me making a type II error given the size of my data set. The three factors that influence power are my alpha value, effect size, and sample size that I use to detect the effect size. 
+
 ```{r, results="hide", include=FALSE}
 ##Power for overall comparison
 plot.power.htest(pwr.t.test(n=26, d=0.7188, sig.level = 0.05, power=NULL))
@@ -283,28 +286,28 @@ stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes
 ```
 
 ```{r, results="hide", include=FALSE}
-#Means, Medians, Range, & 50% coverage intervals For Overall First Paper & Second Paper 
+#Means, Range, & 50% coverage intervals For Overall First Paper & Second Paper 
 mean(Class1$Overall1)
 mean(Class1$Overall2)
 range(Class1$Overall1)
 range(Class1$Overall2)
 quantile(Class1$Overall1, c(0.25, 0.75))
 quantile(Class1$Overall2, c(0.25, 0.75))
-#Means, Medians, Range, & 50% coverage intervals For Overall Third Paper & Fourth Paper 
+#Means, Range, & 50% coverage intervals For Overall Third Paper & Fourth Paper 
 mean(Class2$Overall1)
 mean(Class2$Overall2)
 range(Class2$Overall1)
 range(Class2$Overall2)
 quantile(Class2$Overall1, c(0.25, 0.75))
 quantile(Class2$Overall2, c(0.25, 0.75))
-#Means, Medians, Range, & 50% coverage intervals For Macro First Paper & Second Paper
+#Means, Range, & 50% coverage intervals For Macro First Paper & Second Paper
 mean(Class1$Macro1)
 mean(Class1$Macro2)
 range(Class1$Macro1)
 range(Class1$Macro2)
 quantile(Class1$Macro1, c(0.25, 0.75))
 quantile(Class1$Macro2, c(0.25, 0.75))
-#Means, Medians, Range, & 50% coverage intervals For Macro Third Paper & Fourth Paper
+#Means, Range, & 50% coverage intervals For Macro Third Paper & Fourth Paper
 mean(Class2$Macro1)
 mean(Class2$Macro2)
 range(Class2$Macro1)
@@ -312,7 +315,7 @@ range(Class2$Macro2)
 quantile(Class2$Macro1, c(0.25, 0.75))
 quantile(Class2$Macro2, c(0.25, 0.75))
 ```
-In summation, here are all means, ranges, and 50% coverage intervals for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The median scores for papers 1, 2, 3, and 4 respectively are 2, 2.5, 2, and 3.The ranges for papers 1, 2, 3, and 4  The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. 
+In summation, here are all means, ranges, and 50% coverage intervals for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-3, 2-4, 1-3, and 1-3 respectivley. The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. 
 
 ##How are Professors Commenting?
 ```{r, results="hide", include=FALSE}
