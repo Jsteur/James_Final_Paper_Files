@@ -115,7 +115,7 @@ For my macro and overall outcome variables, I reject the null hypothesis. The pa
 ```{r, echo=FALSE, results="asis"}
 ##Table 1
 colnames(Table_1) <- c("Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample               T-Test 1",notes = "DF=25. Two-tailed test.", Table_1)
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample               T-Test",notes = "DF=25. Two-tailed test.", Table_1)
 ```
 But, this is only one p-value for my outcome variables overall and macro. I want to be especially cautious and run a permutation test of all my different variables. The permutation test creates the sampling distribution by resampling different observations of the data. More specifically, I can actually assign different outcome values to each observation while keeping the observed outcomes of my data. When conducting a permutation test, the null hypothesis states that the treatment groups are not different on the dependent variable. By permuting all the different outcome values, I can see every combination of the possible alternative treatment conditions. Moreover, I can also see the difference in means for my observed data and see these difference in means in comparison to all the differences if the outcome was independent of the treatment. Put differently, I calculate all possible values of my test statistic by permuting all different combinations of my control and treatment groups. 
 
@@ -176,7 +176,7 @@ I found a power rate of 0.72 for macro and 0.61 for macro after taking the avera
 ```{r, echo=FALSE, results="asis"}
 ##Table 2
 colnames(Table_2) <- c("Level", "95% CI", "Permutation p-value", "Cohen's d", "Error Rate", "Power") 
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample               T-Test 1",notes = "DF=25. Two-tailed test.", Table_2)
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Permutation Test, Effect Size, and Power",notes = "DF=25. Two-tailed test.", Table_2)
 ```
 
 ```{r, results="hide", include=FALSE}
@@ -213,8 +213,8 @@ t.test(Class2$Macro2, Class2$Macro1, paired = TRUE, alternative = "two.sided")
 Even with our small sample sizes, it appears that we are detecting an interesting effect. The p-values for all of these different values are different. We are still finding some statistically significant results. [Write down actual p-values or put them in a table in final paper.]
 
 ```{r, echo=FALSE, results="asis"}
-colnames(Table_3) <- c("Class & Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test 1",notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_3)
+colnames(Table_3) <- c("Class and Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test",notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_3)
 ```
 
 ```{r, results="hide", include=FALSE}
@@ -264,8 +264,8 @@ pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 Oh boy. This is not good. It appears that I have very lower power rates. This is unfortunate. It's highly possible that some type of effect is occuring with these students, but the sample size is so small that I'm not detecting any effect. I do detect an effect for overall improvement with paper 1. This could suggest that professor 1 is giving comments which are indicating greater improvement in the overall papers, and professor 2 is giving comments that are resulting in less improvement in a statistically signficant way. However, given my low power rates it's highly possible there is an effect going on with the second batch of students. 
 
 ```{r, echo=FALSE, results="asis"}
-colnames(Table_4) <- c("Level", "95% CI", "Permutation p-value", "Cohen's d", "Error Rate", "Power") 
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test 2", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
+colnames(Table_4) <- c("Class and Level", "95% CI", "Permutation p-value", "Cohen's d", "Error Rate", "Power") 
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Permutation Test, Effect Size, and Power", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
 ```
 
 ```{r, results="hide", include=FALSE}
