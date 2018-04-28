@@ -30,11 +30,13 @@ library(paramtest)
 library(ggplot2)
 library(kableExtra)
 library(stargazer)
+library(devtools)
 ```
 
 ```{r, include=FALSE}
 #Load Data 
 require(RCurl)
+
 s15comments <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Summer_2015_comments_final.csv"))
 s15students <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Summer_2015_students_final.csv"))
 Table_1 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_1_Jake.csv"))
@@ -128,13 +130,14 @@ for(i in seq_len(25) + 1) {
 sum(nullR >= abs(nullR[1])) / length(nullR)
 ```
 
-```{r, echo=FALSE, results="asis"}
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample T-Test 2",notes = "DF=25. Two-tailed test.", Table_2)
-```
+
 
 After running the permutation test for my varibles overall and macro, I found a p-value of 0.004 for overall and 0.01 for macro level, so I reject the null hypotheses. These results suggest that students are improving the quality of their overall papers, and these effects are most likely not due to chance. After running the paired sample t-test and permutation test, it is still possible that I am commiting a type I error and the effects we see in student improvement are false positives. However, running both tests gives me more confidence that I am less likely to comit a type I error with my data. 
 
 P-values can be deceptive though! A p-value alone does indicate evidence against our null hypothesis, but it doesn't tell us anything about the effect size we observe. A p-value, after all, doesn't capture the effect size of my variables. So, what are the effect sizes for overall and macro? In order to calculate the effect sizes of my outcomes varaibles, I decided to find Cohen's d. One reason I decided to use Cohen's d was to calculate the effect sizes from the difference in means between the students' first and second papers. [Need to include more discussion of Cohen's d here.]
+
+
+
 
 ```{r, results="hide", include=FALSE}
 #Effect size with package
@@ -248,8 +251,8 @@ pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 ```
 Oh boy. This is not good. It appears that I have very lower power rates. This is unfortunate. It's highly possible that some type of effect is occuring with these students, but the sample size is so small that I'm not detecting any effect. I do detect an effect for overall improvement with paper 1. This could suggest that professor 1 is giving comments which are indicating greater improvement in the overall papers, and professor 2 is giving comments that are resulting in less improvement in a statistically signficant way. However, given my low power rates it's highly possible there is an effect going on with the second batch of students. 
 
-```{r}
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test 2",notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
+```{r, echo=FALSE, results="asis"}
+stargazer(summary=FALSE, header=FALSE, type = "latex", float.env = "sidewaystable", title = "Separate Classes Paired Sample T-Test 2", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
 ```
 
 
