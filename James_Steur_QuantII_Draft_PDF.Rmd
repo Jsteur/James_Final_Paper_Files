@@ -137,8 +137,6 @@ After running the permutation test for my varibles overall and macro, I found a 
 P-values can be deceptive though! A p-value alone does indicate evidence against our null hypothesis, but it doesn't tell us anything about the effect size we observe. A p-value, after all, doesn't capture the effect size of my variables. So, what are the effect sizes for overall and macro? In order to calculate the effect sizes of my outcomes varaibles, I decided to find Cohen's d. One reason I decided to use Cohen's d was to calculate the effect sizes from the difference in means between the students' first and second papers. [Need to include more discussion of Cohen's d here.]
 
 
-
-
 ```{r, results="hide", include=FALSE}
 #Effect size with package
 res = cliff.delta(s15students$Overall1,s15students$Overall2,return.dm=TRUE)
@@ -167,6 +165,9 @@ plot.power.htest(pwr.t.test(n=26, d=0.7188, sig.level = 0.05, power=NULL))
 plot.power.htest(pwr.t.test(n=26, d=.6068, sig.level = 0.05, power=NULL))
 ```
 I found a power rate of 0.72 for macro and 0.61 for macro. Overall, given my small sample sizes, these power rates aren't too bad. We, of course, want higher power if possible, but with a sample size of 26 this is pretty good. Ideally, I would want power around 0.8, these are still fairly good powers. This means that I most likely did not falsely reject the null hypothesis. [Talk more about how you performed power calculation and the underlying assumptions here--justify! You ran a 1000 simulations of the data to make sure you were being cautious.]
+
+#==Fix later.
+stargazer(summary=FALSE, header=FALSE, float.env = "sidewaystable", type = "latex", title = "Pooled Classes Paired Sample T-Test 2",notes = "DF=25. Two-tailed test.", Table_2)
 ```{r, results="hide", include=FALSE}
 # create user-defined function to generate and analyze data
 #simNum
@@ -252,7 +253,7 @@ pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 Oh boy. This is not good. It appears that I have very lower power rates. This is unfortunate. It's highly possible that some type of effect is occuring with these students, but the sample size is so small that I'm not detecting any effect. I do detect an effect for overall improvement with paper 1. This could suggest that professor 1 is giving comments which are indicating greater improvement in the overall papers, and professor 2 is giving comments that are resulting in less improvement in a statistically signficant way. However, given my low power rates it's highly possible there is an effect going on with the second batch of students. 
 
 ```{r, echo=FALSE, results="asis"}
-stargazer(summary=FALSE, header=FALSE, type = "latex", float.env = "sidewaystable", title = "Separate Classes Paired Sample T-Test 2", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test 2", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
 ```
 
 
