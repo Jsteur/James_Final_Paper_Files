@@ -164,6 +164,10 @@ cohen.d(s15students$Overall2,s15students$Overall1,pooled=TRUE,paired=TRUE,
 cohen.d(s15students$Macro2,s15students$Macro1,pooled=TRUE,paired=TRUE,
                        na.rm=FALSE, hedges.correction=FALSE,
                        conf.level=0.95,noncentral=FALSE)
+
+cohen.d(s15students$Mid2,s15students$Mid1,pooled=TRUE,paired=TRUE,
+                       na.rm=FALSE, hedges.correction=FALSE,
+                       conf.level=0.95,noncentral=FALSE)
 ##Cohen’s d and Hedges’ g are interpreted in a similar way. Cohen suggested using the following rule of thumb for interpreting results: Use Cohen when n > 20 and Hedge when n < 20
 ```
 
@@ -173,9 +177,9 @@ Given my small sample size, the effect sizes for overall and macro are fairly la
 
 Since I selected my alpha value to be 0.05, the error rate for my overall and macro level outcomes varaible is 5%. That is, I have a 5% chance of committing a type I error and showing a false-positve from my data. 
 
-After finding the error rate, I calculated the power rate of overall and macro. Why did I calculate the power rate? The power is going to assess the probability of me making a type II error; rephrased, my power shows the probability of my hypothesis test producing a false negative. Power rates fall between values of zero and one. The higher the power, the less probable it is you make a type type II error. The lower the power, the more probable it is you make a type II error and falsely reject the null. Consequently, I want to see if I falsely rejected the null hypotheses for my mid and micro outcome variables.
+After finding the error rate, I calculated the power rate of overall and macro. Why did I calculate the power rate? The power is going to assess the probability of me making a type II error; rephrased, my power shows the probability of my hypothesis test producing a false negative. Power rates fall between values of zero and one. The higher the power, the less probable it is you make a type type II error. The lower the power, the more probable it is you make a type II error and falsely reject the null. For instance, a power of 0.8 means I have an 80% chance of correctly failing to reject the null. Conversly, a power of 0.8 means I have a 20% chance of incorrectly failing to reject the null. Consequently, I want to see what the power rates for overall and macro. 
 
-The three factors that influence power are your alpha value, effect size, and sample size that you use to detect the effect size. One reason I selected $\alpha$=0.05 is to defend against false positives without having $\alpha$ values that are ludicrously conservative like 0.0001 and miss strong effects. In order to be especially cautious, I ran 1000 different simulations of my data and found each of those power rates. Afterwards, I took the mean of all my power rates. Rather than just run one simulation, running 1000 gives me more confidence that my power is more likely to be accurate. 
+The three factors that influence power are your alpha value, effect size, and sample size used to detect the effect size. One reason I selected $\alpha$=0.05 is to defend against false positives without having $\alpha$ values that are ludicrously conservative like 0.0001 and miss strong effects. I ran 1000 different simulations of my data and found each of those power rates. Afterwards, I took the mean of all my power rates. Rather than just run one simulation, running 1000 gives me more confidence that my power is more likely to be accurate. 
 
 ```{r, results="hide", include=FALSE}
 ##Power for overall comparison
@@ -185,11 +189,11 @@ plot.power.htest(pwr.t.test(n=26, d=0.7188, sig.level = 0.05, power=NULL))
 plot.power.htest(pwr.t.test(n=26, d=.6068, sig.level = 0.05, power=NULL))
 ```
 
-I found a power rate of 0.72 for overall and 0.61 for macro after taking the average of all my simulations (Table 2). Overall, given my small sample sizes, these power rates aren't too bad. We, of course, want higher power if possible, but with a sample size of 26 this is pretty good. Ideally, I would want power around 0.8, these are still fairly good powers. This means that I most likely did not falsely reject the null hypothesis. [Talk more about how you performed power calculation and the underlying assumptions here--justify! You ran a 1000 simulations of the data to make sure you were being cautious.]
+I found a power rate of 0.72 for overall and 0.61 for macro after taking the average of all my simulations (Table 2). Overall, given my small sample sizes, these power rates aren't too bad. Generally, studies should be designed to detect an effect 80% of the time and produce false negative roughly 20% of the time (Cohen, 1988.) We, of course, want higher power if possible, but with a sample size of 26 these powers are fairly good. This means that I most likely did not falsely reject the null hypothesis for these two variables. 
 
 ```{r, echo=FALSE, results="asis"}
 ##Table 2
-colnames(Table_2) <- c("Level", "95% CI", "Permutation p-value", "Cohen's d", "Error Rate", "Power") 
+colnames(Table_2) <- c("Level", "95% CI", "Permutation p-value", "Cohen's d", "Error Rate", "Power")
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Permutation Test, Effect Size, and Power",notes = "DF=25. Two-tailed test.", Table_2)
 ```
 
@@ -215,7 +219,10 @@ power_ttest <- run_test(t_func, n.iter=1000, output='data.frame', N=26, d=0.7188
 results(power_ttest) %>%
     summarise(power=mean(sig))
 ```
-What does all of this analysis actually say about students learning how to write? The bottom line is that students appear to be learning how to write better from their classes. Since we see an average shift of 0.5 in the mean difference for comments, this means that most students started out at a "B" level of writing in this class, and they ended up improving with a final paper grade of "B+" or "A-." This is a huge shift in learning for one semester! Simply showing that students are learning how to write from professors comments is an important milestone, but I'm also interested in seeing if one professors' style of commenting resulted in greater improvement for certain students.
+
+What does all my analysis actually say about students learning how to write? The bottom line is that students appear to be learning how to write better from their classes. Since we see an average shift of 0.5 in the mean difference for comments, this means that most students started out at a "B" level of writing in this class, and they ended up improving with a final paper grade of "B+" or "A-." This is a huge shift in learning for one semester! Simply showing that students are learning how to write from professors comments is an important milestone. Moreover, most of this improvement is on global issues of writing related to thesis development, organization, logic, and use of evidence. Although some teachers emphasize grammar and more mechanical features of writing, most set out with the goal to improve these bigger picture aspects of their students' writing. Thankfully, students appear to be learning from their classes. 
+
+However, I'm also interested in seeing if one style of commenting resulted in greater improvement for students. It's one thing to say that students are learning how to write from taking a class, but it's another thing to see if different styles improve learning at a faster rate. So, I split the students into their respective classes and conducted four paired sample t-tests to see if different classes showed different levels of improvement.
 
 ```{r, results="hide", include=FALSE}
 #Class Specific T-Tests
@@ -224,7 +231,8 @@ t.test(Class2$Overall2, Class2$Overall1, paired = TRUE, alternative = "two.sided
 t.test(Class1$Macro2, Class1$Macro1, paired = TRUE, alternative = "two.sided")
 t.test(Class2$Macro2, Class2$Macro1, paired = TRUE, alternative = "two.sided")
 ```
-Even with our small sample sizes, it appears that we are detecting an interesting effect. The p-values for all of these different values are different. We are still finding some statistically significant results. [Write down actual p-values or put them in a table in final paper.]
+
+Even with our small sample sizes, it appears that we are detecting an interesting effect (Table 3). The p-values for all of these different values are different. We are still finding some statistically significant results. [Write down actual p-values or put them in a table in final paper.]
 
 ```{r, echo=FALSE, results="asis"}
 colnames(Table_3) <- c("Class and Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
@@ -343,7 +351,6 @@ stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Overall Means, R
 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Overall Means, Ranges, and Coverage Intervals", notes = "Paper 1 and 2=Professor 1. Paper 3 and 4=Professor 2.", Macro_Table)
 ```
-
 
 In summation, look at table X and Y for a summary of all the scores.  here are all means, ranges, and 50% coverage intervals for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-3, 2-4, 1-3, and 1-3 respectivley. The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. For macro quality of the paper, the mean scores for papers 1, 2, 3, and 4 respectively are 2.25, 2.69, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-4, 2-4, 1-3, and 1-3. The 50% coverage interval for 
 
