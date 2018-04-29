@@ -653,10 +653,3 @@ The 2 paper is also organized around a thesis statement, but the thesis may not 
 ###1 Paper
 
 The 1 paper has no central idea or one that is too general to be developed. Paragraphs are not logically connected, and transitions do not generally exist. Development is inadequate with poor balance between general ideas and specific support. Sentences are often ungrammatical and word choice faulty. As a result, the paper fails to present a conscientious inquiry into a problem and seems to disregard its audience.
-
-```{r, echo=FALSE, results= "asis"}
-##Supplementary Materials
-
-
-kable(temp1)
-```
