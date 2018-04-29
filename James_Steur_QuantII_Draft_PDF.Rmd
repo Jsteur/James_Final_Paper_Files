@@ -274,22 +274,26 @@ cohen.d(Class2$Macro2,Class2$Macro1,pooled=TRUE,paired=TRUE,
                        conf.level=0.95,noncentral=FALSE)
 ```
 
-I still want to be cautious, so I'll run a two-sided permutation test for these two different classes and outcome variables. After I ran my permutation test, it appears that I fail to reject the null hypothesis in most cases (table 4), but students in class 1 appear to be improving their overall quality of papers with *p*=0.035. Failing to reject the null hypotheses is most likely due to my smaller sample sizes and my study being underpowered. Before I find the power of my outcome variables, let's find the effect size of the different variables. 
+I still want to be cautious, so I'll run a two-sided permutation test for these two different classes and outcome variables. After I ran my permutation test, it appears that I fail to reject the null hypothesis in most cases (Table 4), but students in class 1 appear to be improving their overall quality of papers with *p*=0.035. Failing to reject the null hypotheses is most likely due to my smaller sample sizes and my study being underpowered. Before I find the power of my outcome variables, let's find the effect size of the different variables. 
 
-In order to find the effect size for the two different classes and their respective outcome variables, I used Hedges' g. One reason I chose Hedges' g are my sample sizes. When n<20, Hedges' g produces less biased effect sizes since it divides the difference in means by the pooled and weighted standard deviations of the sample. Dividng by the pooled and weighted standard deviation helps account for the small sample size by getting a more precise measure of the standard deviation of the small sample and helps remove a small positive bias (Hedges, 1981). If I were to use Cohen's d for these different calculations, the effect sizes could be more positvely biased given the small sample sizes. Moreover, Hedges' g assumes that the variences of both populations are equal, and they are in my data. 
+In order to find the effect size for the two different classes and their respective outcome variables, I used Hedges' g. One reason I chose Hedges' g are my sample sizes. When n<20, Hedges' g produces less biased effect sizes since it divides the difference in means by the pooled and weighted standard deviations of the sample. Dividng by the pooled and weighted standard deviation helps account for the small sample size by getting a more precise measure of the standard deviation of the small sample and helps remove a small positive bias (Hedges, 1981). If I were to use Cohen's d for these different calculations, the effect sizes could be more positvely biased given the small sample sizes. Moreover, Hedges' g assumes that the variences of both populations are equal, and they are in my data. See Table 4 for all of these different effect sizes. 
 ```{r, results="hide", include=FALSE}
 pwr.t.test(n=16, d=0.6674, sig.level = 0.05, power=NULL)
 pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 pwr.t.test(n=16, d=0.524, sig.level = 0.05, power=NULL)
 pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 ```
-Oh boy. This is not good. It appears that I have very lower power rates. This is unfortunate. It's highly possible that some type of effect is occuring with these students, but the sample size is so small that I'm not detecting any effect. I do detect an effect for overall improvement with paper 1. This could suggest that professor 1 is giving comments which are indicating greater improvement in the overall papers, and professor 2 is giving comments that are resulting in less improvement in a statistically signficant way. However, given my low power rates it's highly possible there is an effect going on with the second batch of students. 
+
+Since I selected $\alpha$=0.05, the error rate for my overall and macro level outcomes varaible is 5%. That is, I have a 5% chance of committing a type I error and showing a false-positve from my data. 
+
+After I found my error rates, I decided to find the power rate for the two classes and their outcome varaibles. I ran 1000 different simulations of my data and found each of those power rates. Afterwards, I took the mean of all my power rates. This gave me more confidence that my power rates are accurate. 
+
+Unsurprisingly, I have low power rates of 0.450 for Class 1 Overall as well as 0.3 for Class 2 Overall, Class 1 Macro, and Class 2 Macro (Table 4). This is unfortunate. It's highly possible that some type of effect is occuring with these students, but the power of test is so small that I'm not detecting any noticeable effects. I do detect an effect for overall improvement with paper 1. This could suggest that professor 1 is giving comments which are indicating greater improvement in the overall papers, and professor 2 is giving comments that are resulting in less improvement in a statistically signficant way. However, given my low power rates it's highly possible there is an effect going on with the second batch of students. 
 
 ```{r, echo=FALSE, results="asis"}
 colnames(Table_4) <- c("Class and Level", "95% CI", "Permutation p-value", "Hedges' g", "Error Rate", "Power") 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Permutation Test, Effect Size, and Power", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
 ```
-
 ```{r, results="hide", include=FALSE}
 #Means, Range, & 50% coverage intervals For Overall First Paper & Second Paper 
 mean(Class1$Overall1)
