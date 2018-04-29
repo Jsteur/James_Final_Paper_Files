@@ -129,6 +129,8 @@ Suppose, for example, we have sample A and B with sample means a and b. The perm
 
 Why am I running a permutation based test? The permutation test is a nonparametric way to test for differences between my samples. One advantage to this approach is that I do not need to assume the type of distribution my data follows. If the data did not follow a normal distribution, and I only conducted one paired sample t-test, then my resulting *p*-value could be wrong from this initial assumption. A permutation test builds my distribution and then conducts the analysis, which provides a more robust way to see if I have evidence against the null hypothesis. The second advantage of this approach is that I test all possible combinations of my control and treatment groups with my data. If I only test one combination of my observed data, it is more likely that the effects I see could be due to chance. So, if I use a permutation test and see all possible permutations of my control and treatment groups' test statistics, then I can be more confident that the effects I see are not due to chance.
 
+There is one important assumption of permutation based tests. First, the observations in your data set are shufflable under the null. Thankfully, my data is permutable under the null hypothesis. Why? I have subjects from a common pool--the students--and we think the treatment (professors written comments) does nothing for student writing or changes the mean scores of overall and macro. If modifying the treatment doesn't change anything, then the numbers that identify which subject recieves different treatments is arbitrary, so we can permute the values of the test statistic under the null. A consequense of this assumption is that the data in the permutation paired sample t-test have equal varience. Thankfully, my data has equal varience (Table 6.)
+
 ```{r, results="hide", include=FALSE}
 #Paired Permutation Test with Package
 perm.test(s15students$Overall1, s15students$Overall2, paired = T, alternative = "two.sided")
@@ -294,6 +296,7 @@ Unsurprisingly, I have low power rates of 0.450 for Class 1 Overall as well as 0
 colnames(Table_4) <- c("Class and Level", "95% CI", "Permutation p-value", "Hedges' g", "Error Rate", "Power") 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Permutation Test, Effect Size, and Power", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
 ```
+
 ```{r, results="hide", include=FALSE}
 #Means, Range, & 50% coverage intervals For Overall First Paper & Second Paper 
 mean(Class1$Overall1)
@@ -345,6 +348,7 @@ row.names(Macro_Table) <- c("Paper 1", "Paper 2", "Paper 3", "Paper 4")
 colnames(Macro_Table) <-c("Means", "Ranges", "50% Coverage Intervals")
 ```
 
+In summation, look at table X and Y for a summary of all the scores.  here are all means, ranges, and 50% coverage intervals for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-3, 2-4, 1-3, and 1-3 respectivley. The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. For macro quality of the paper, the mean scores for papers 1, 2, 3, and 4 respectively are 2.25, 2.69, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-4, 2-4, 1-3, and 1-3. The 50% coverage interval for 
 ```{r, echo=FALSE, results="asis"}
 ##Summarize Variables of Interest.
 
@@ -355,8 +359,6 @@ stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Overall Means, R
 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Overall Means, Ranges, and Coverage Intervals", notes = "Paper 1 and 2=Professor 1. Paper 3 and 4=Professor 2.", Macro_Table)
 ```
-
-In summation, look at table X and Y for a summary of all the scores.  here are all means, ranges, and 50% coverage intervals for the overall quality of the paper. The mean scores for papers 1, 2, 3, and 4 respectively are 2.125, 2.625, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-3, 2-4, 1-3, and 1-3 respectivley. The 50 percent coverage intervals for papers 1, 2, 3, and 4 respectively are 2–3, 2–3, 2–2, and 2–3. For macro quality of the paper, the mean scores for papers 1, 2, 3, and 4 respectively are 2.25, 2.69, 2, and 2.5. The ranges for papers 1, 2, 3, and 4 are 1-4, 2-4, 1-3, and 1-3. The 50% coverage interval for 
 
 ##How are Professors Commenting?
 ```{r, results="hide", include=FALSE}
