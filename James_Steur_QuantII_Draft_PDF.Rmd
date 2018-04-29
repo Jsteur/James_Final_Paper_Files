@@ -399,19 +399,6 @@ I've identified that students receiving comments on their papers improve by the 
 
 First, there is a noticeable difference in the primary ways that professors one and two comment in terms of their purpose. Professor one has a high frequency of praising his or her students. A praising comment would indicate that the professor approves of a choice in the student's writing, which may or may not include an additional suggestion. For example, a comment that praises would say something like, "Good work! I enjoy your transition sentence." Professor two, on the other hand, primarily relies on advising by giving general feedback without making a specific correction. Some examples of advising would be, "This paragraph would be more compelling if you discussed the counterargument more," or "you should delete this sentence." Both professors had roughly equal levels of problem detecting purpose comments. Generally, these comments took the form of "This isn't accurate."
 
-```{r}
-counts1 <- table(s15comments$Class, s15comments2$Purpose)
-barplot(counts1, main="Frequency of Purpose Comments For Class 1 & 2",
-  xlab="Purpose of Commenting", col=c("darkblue","red"),
- 	ylim=c(0,100), legend = rownames(counts1), beside=TRUE)
-
-##Style 
-counts2 <- table(s15comments$Class, s15comments2$Style)
-barplot(counts2, main="Frequency of Style Comments For Class 1 & 2",
-  xlab="Style of Commenting", col=c("darkblue","red"),
- 	ylim=c(0,120), legend = rownames(counts2), beside=TRUE)
-```
-
 ```{r, echo=FALSE, results= "asis"}
 ##Purpose Comments
 
@@ -424,6 +411,16 @@ stargazer(summary=FALSE, header=FALSE, type = "latex",
 
 
 Second, Professor one's style of commenting was primarily evaluative. This style of commenting evaluates the writing quality as "good" or "bad." Professor one may write something like, “This paper is great and needs little revision!” One important aspect to note is that professor one primarily relied on positive evaluation. Although there were some negative aspects, most of the comments that researchers coded were positive evlauations. Professor two's style of commenting was primarily a directive approach. This style of commenting advises students to make a change in their writing without directly making the change. For instance, a comment like, “In future papers, you should develop your thesis more,” would be a directive. 
+
+```{r, echo=FALSE, results= "asis"}
+##Style Comments
+
+counts1 <- data.frame(table(s15comments$Class, s15comments2$Style))
+colnames(counts1) <- c("Professor", "Style", "Frequency")
+stargazer(summary=FALSE, header=FALSE, type = "latex", 
+          title = "Frequency of Purpose Comments",
+          notes = "Class 1 N=201. Class 2 N=178.", counts1)
+```
 
 I have created Figure 1 to highlight the stark differences in the purpose and style of each professors commenting. 
 
