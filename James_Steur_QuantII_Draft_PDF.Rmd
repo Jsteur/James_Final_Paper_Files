@@ -395,9 +395,9 @@ barplot(counts4, main="Frequency of Article Comments For Class 1 & 2",
   xlab="Level of Commenting", col=c("darkblue","red"),
  	ylim=c(0,40), legend = rownames(counts4), beside=TRUE)
 ```
-I've identified that students receiving comments on their papers improve by the end of the class. That is, there are clearly identifiable effects we can observe when pooling all the students together, but what is causing this improvement in the final papers? Given the observational nature of this data, it is impossible to entirely rule out confounding varibals and other factors that could influence the results. However, it's worth investigating the differnt approaches both professors took when they commented on all of their papers since I rejected the null hypothesis for Class 1 Overall. 
+I've identified that students receiving comments on their papers improve by the end of the class. That is, there are clearly identifiable effects we can observe when pooling all the students together, but what is causing this improvement in the final papers? Given the observational nature of this data, it is impossible to entirely rule out confounding variables and other factors that could influence the results. However, it's worth investigating the different approaches both professors took when they commented on all of their papers since I rejected the null hypothesis for Class 1 Overall. 
 
-First, there is a noticeable difference in the primary ways that professors one and two comment in terms of their purpose. Professor one has a high frequency of praising his or her students. A praising comment would indicate that the professor approves of a choice in the student's writing, which may or may not include an additional suggestion. For example, a comment that praises would say something like, "Good work! I enjoy your transition sentence." Professor two, on the other hand, primarily relies on advising by giving general feedback without making a specific correction. Some examples of advising would be, "This paragraph would be more compelling if you discussed the counterargument more," or "you should delete this sentence." Both professors had roughly equal levels of problem detecting purpose comments. Generally, these comments took the form of "This isn't accurate."
+First, there is a noticeable difference in the primary ways that professors one and two comment in terms of their purpose. Professor one has a high frequency of praising his or her students. A praising comment would indicate that the professor approves of a choice in the student's writing, which may or may not include an additional suggestion. For example, a comment that praises would say something like, "Good work! I enjoy your transition sentence." Professor two, on the other hand, primarily relies on advising by giving general feedback without making a specific correction. Some examples of advising would be, "This paragraph would be more compelling if you discussed the counterargument more," or "you should delete this sentence." Both professors had roughly equal levels of problem detecting purpose comments. Generally, these comments took the form of "this isn't accurate." Table 7 shows the different types of comments that occurred.
 
 ```{r, echo=FALSE, results= "asis"}
 ##Purpose Comments
@@ -409,8 +409,7 @@ stargazer(summary=FALSE, header=FALSE, type = "latex",
           notes = "Class 1 N=201. Class 2 N=178.", counts1)
 ```
 
-
-Second, Professor one's style of commenting was primarily evaluative. This style of commenting evaluates the writing quality as "good" or "bad." Professor one may write something like, “This paper is great and needs little revision!” One important aspect to note is that professor one primarily relied on positive evaluation. Although there were some negative aspects, most of the comments that researchers coded were positive evlauations. Professor two's style of commenting was primarily a directive approach. This style of commenting advises students to make a change in their writing without directly making the change. For instance, a comment like, “In future papers, you should develop your thesis more,” would be a directive. 
+Second, professor one's style of commenting was primarily evaluative. This style of commenting evaluates the writing quality as "good" or "bad." Professor one may write something like, “This paper is great and needs little revision!” One important aspect to note is that professor one primarily relied on positive evaluation. Although there were some negative aspects, most of the comments that researchers coded were positive evaluations. Professor two's style of commenting was primarily a directive approach. This style of commenting advises students to make a change in their writing without directly making the change. For instance, a comment like, “In future papers, you should develop your thesis more,” would be a directive. Table 8 shows the breakdown of each professors' style of commenting.
 
 ```{r, echo=FALSE, results= "asis"}
 ##Style Comments
@@ -422,9 +421,7 @@ stargazer(summary=FALSE, header=FALSE, type = "latex",
           notes = "Class 1 N=201. Class 2 N=178.", counts1)
 ```
 
-I have created Figure 1 to highlight the stark differences in the purpose and style of each professors commenting. 
-
-
+I have created Figure 1 to highlight the stark differences in the purpose and style of each professors commenting. As a reminder, I and another researcher coded each comment a professor made across seven dimensions: class, paper, student, purpose, style, level, and article. By highlighting the frequency of purpose and style together, it is easier to visualize how each professor comments on student papers. Importantly, this figure combines all comments from the first and last paper of the semester for both professors. Both professors had distinct commenting styles and combining comments from the first and last paper highlight these differences.
 
 ```{r, echo=FALSE}
 #Figure 1 Graph with Style & Purpose
@@ -440,9 +437,11 @@ s15comments2 %>% filter(Style!="NA" & Purpose != "NA") %>%
   scale_x_discrete(drop=FALSE)
 ```
 
-Third, Professor one made more comments that were related to big-picture features of the writing. Professor two made a large amount of comments about global features of writing as well, but not as many as professor 1. Professor two did make more comments on micro-level features of student writing than professor one. Both professors made roughly the same amount of comments about sentence level features of their students' writing. 
+As Figure 1 indicates, professor one has over 75 comments on student papers that are praising and evaluative, and professor two has over 87 comments on student papers that are advising and directive. Both ways of commenting on student papers are drastically different from one another. 
 
-Fourth, in terms of articles, professor 1 has the highest number of comments for organization, evidence, and logic and reasoning. Professor 2 had the highest number of comments for citation errors and the works cited page. 
+Third, professor one made more comments that were related to big-picture features on the students' writing (n=128). Professor two made a large amount of comments about global features of writing as well, but not as many as professor 1 (n=87). Professor two did make more comments on micro-level features of student writing than professor one (see Table 9). Both professors made roughly the same amount of comments about sentence level features of their students' writing (see Appendix 1 for breakdown of level). 
+
+Finally, in terms of articles, professor 1 has the highest number of comments for organization (n=38), evidence (n=43), and logic and reasoning (n=39). Professor 2 had the highest number of comments for citation errors and the works cited page (n=34). (Review Table 10 for a more thorough breakdown of each n for all coded articles.)
 
 ```{r, results="hide", echo=FALSE}
 ##Level 
