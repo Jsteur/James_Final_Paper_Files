@@ -467,14 +467,24 @@ stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Art
           notes = "Class 1 N=201. Class 2 N=178.", counts4)
 ```
 
-
 # **Part III** 
 
 ##Discussion
 
+[Include examples of most steropytical comments.]
 
+Students improve regardless of the two different methods 
+Improvement with evaluative appears greater—positive praise helps
+Students understand evaluative comments better than technical terminology. 
+Lore—this is what we do at my writing center scholarship
+“While it [lore] is often marketed as research and inhabits a substantial place in WCJ, this kind of scholarship offers little more than anecdotal evidence, one person’s experience, to support its claims” (Driscoll & Perdue, 2012, 16). 
+Writing Center Lore: 
+Macro-oriented focus
+Non-directive and Evaluative
+Learner (2014)
+WCJ most cited
+“While WCJ has published many articles that discuss data, we would classify only sixteen percent of its articles as replicable, aggregable, and data-supported research.…Clearly, the story of RAD research in WCJ is one of yet-to-be-met potential” (Driscoll & Perdue, 2012, 29). 
 
-[Include more description about the ways these professors were commenting on everything. Also get your graphs and contigency tables to pop up approprietly.]
 
 ##Limitations/Future Directions
 
@@ -492,6 +502,12 @@ Future directions for this research could include making a machine learning algo
 As exploratory approaches, pre-experiments can be a cost-effective way to discern whether a potential explanation is worthy of further investigation.
 
 Since researchers were blinded from any identifying information about the students, it is possible that students differ on some unobservable covariates. 
+
+Sample size
+Time frame 
+No end comments were coded
+Type of student in each class 
+
 
 \pagebreak
 
