@@ -166,6 +166,7 @@ cohen.d(s15students$Macro2,s15students$Macro1,pooled=TRUE,paired=TRUE,
                        conf.level=0.95,noncentral=FALSE)
 ##Cohen’s d and Hedges’ g are interpreted in a similar way. Cohen suggested using the following rule of thumb for interpreting results: Use Cohen when n > 20 and Hedge when n < 20
 ```
+
 I found an effect size of 0.71 for overall and 0.61 for macro (Table 2), but what do these effect sizes really mean? Conventionally, an effect size of 0.8 is considered large, 0.5 is medium, and 0.2 is small. Put differently, seeing an effect size of 0.2 is usually something you can only see with careful study, whereas an effect size of 0.8 is high enough for someone to see the effects with the naked eye. The effect size largely depends on context. For example, seeing an effect size of 0.2 may usually be considered small, but it may be large if the effect is observed in preventing suicide. Context and expertise is important when interpreting the different effect sizes. 
 
 Given my small sample size, these effect sizes are fairly large. This means that students appear to be improving at a meaningful rate with their writing abilities by the end of the semester. These effect sizes indicate that students are learning over the course of the semetser and end up producing "better" quality work. 
