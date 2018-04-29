@@ -232,7 +232,7 @@ t.test(Class1$Macro2, Class1$Macro1, paired = TRUE, alternative = "two.sided")
 t.test(Class2$Macro2, Class2$Macro1, paired = TRUE, alternative = "two.sided")
 ```
 
-After subsetting the two classes, my sample size shrunk for the subsequent analysis. My class 1 n=15 and class 2 n=10. However, despite these small sample sizes, I still reject the null hypothesis for class 1's overall and macro outcomes (Table 3). Conversly, I fail to reject the null hypothesis for class 2's overall and macro outcomes with *p*=0.052, which is just on the threshold of statistical signifigance. 
+After subsetting the two classes, my sample size shrunk for the subsequent analysis. My class 1 n=16 and class 2 n=10. However, despite these small sample sizes, I still reject the null hypothesis for class 1's overall and macro outcomes (Table 3). Conversly, I fail to reject the null hypothesis for class 2's overall and macro outcomes with *p*=0.052, which is just on the threshold of statistical signifigance. 
 
 ```{r, echo=FALSE, results="asis"}
 colnames(Table_3) <- c("Class and Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
