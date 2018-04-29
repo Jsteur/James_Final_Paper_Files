@@ -222,7 +222,7 @@ results(power_ttest) %>%
 
 What does all my analysis actually say about students learning how to write? The bottom line is that students appear to be learning how to write better from their classes. Since we see an average shift of 0.5 in the mean difference for comments, this means that most students started out at a "B" level of writing in this class, and they ended up improving with a final paper grade of "B+" or "A-." This is a huge shift in learning for one semester! Simply showing that students are learning how to write from professors comments is an important milestone. Moreover, most of this improvement is on global issues of writing related to thesis development, organization, logic, and use of evidence. Although some teachers emphasize grammar and more mechanical features of writing, most set out with the goal to improve these bigger picture aspects of their students' writing. Thankfully, students appear to be learning from their classes. 
 
-However, I'm also interested in seeing if one style of commenting resulted in greater improvement for students. It's one thing to say that students are learning how to write from taking a class, but it's another thing to see if different styles improve learning at a faster rate. So, I split the students into their respective classes and conducted four paired sample t-tests to see if different classes showed different levels of improvement.
+However, I'm also interested in seeing if one style of commenting resulted in greater improvement for students. It's one thing to say that students are learning how to write from taking a class, but it's another thing to see if different styles improve learning at a faster rate. So, I split the students into their respective classes and conducted four two-tailed paired sample t-tests to see if different classes showed different levels of improvement with $\alpha$=0.05.
 
 ```{r, results="hide", include=FALSE}
 #Class Specific T-Tests
@@ -232,7 +232,7 @@ t.test(Class1$Macro2, Class1$Macro1, paired = TRUE, alternative = "two.sided")
 t.test(Class2$Macro2, Class2$Macro1, paired = TRUE, alternative = "two.sided")
 ```
 
-Even with our small sample sizes, it appears that we are detecting an interesting effect (Table 3). The p-values for all of these different values are different. We are still finding some statistically significant results. [Write down actual p-values or put them in a table in final paper.]
+After subsetting the two classes, my sample size shrunk for the subsequent analysis. My class 1 n=15 and class 2 n=10. However, despite these small sample sizes, I still reject the null hypothesis for class 1's overall and macro outcomes (Table 3). Conversly, I fail to reject the null hypothesis for class 2's overall and macro outcomes with *p*=0.052, which is just on the threshold of statistical signifigance. 
 
 ```{r, echo=FALSE, results="asis"}
 colnames(Table_3) <- c("Class and Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
@@ -273,10 +273,10 @@ cohen.d(Class2$Macro2,Class2$Macro1,pooled=TRUE,paired=TRUE,
                        na.rm=FALSE, hedges.correction=TRUE,
                        conf.level=0.95,noncentral=FALSE)
 ```
-[Elaborate more on power calculation you did here. You decided to calculate your effect size with Hedges' g due to the smaller sample size. Also talk about underlying stats here.)
 
-This isn't good! After I ran my permutation test, it appears that I fail to reject the null hypothesis in most cases! This is most likely due to the smaller sample sizes. Let's check the power of my new subsamples to see if there could be a problem there. 
+I still want to be cautious, so I'll run a two-sided permutation test for these two different classes and outcome variables. After I ran my permutation test, it appears that I fail to reject the null hypothesis in most cases (table 4), but students in class 1 appear to be improving their overall quality of papers with *p*=0.035. Failing to reject the null hypotheses is most likely due to my smaller sample sizes and my study being underpowered. Before I find the power of my outcome variables, let's find the effect size of the different variables. 
 
+In order to find the effect size for the two different classes and their respective outcome variables, I used Hedges' g. One reason I chose Hedges' g are my sample sizes. When n<20, Hedges' g produces less biased effect sizes since it divides the difference in means by the pooled and weighted standard deviations of the sample. Dividng by the pooled and weighted standard deviation helps account for the small sample size by getting a more precise measure of the standard deviation of the small sample and helps remove a small positive bias (Hedges, 1981). If I were to use Cohen's d for these different calculations, the effect sizes could be more positvely biased given the small sample sizes. Moreover, Hedges' g assumes that the variences of both populations are equal, and they are in my data. 
 ```{r, results="hide", include=FALSE}
 pwr.t.test(n=16, d=0.6674, sig.level = 0.05, power=NULL)
 pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
@@ -286,7 +286,7 @@ pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 Oh boy. This is not good. It appears that I have very lower power rates. This is unfortunate. It's highly possible that some type of effect is occuring with these students, but the sample size is so small that I'm not detecting any effect. I do detect an effect for overall improvement with paper 1. This could suggest that professor 1 is giving comments which are indicating greater improvement in the overall papers, and professor 2 is giving comments that are resulting in less improvement in a statistically signficant way. However, given my low power rates it's highly possible there is an effect going on with the second batch of students. 
 
 ```{r, echo=FALSE, results="asis"}
-colnames(Table_4) <- c("Class and Level", "95% CI", "Permutation p-value", "Cohen's d", "Error Rate", "Power") 
+colnames(Table_4) <- c("Class and Level", "95% CI", "Permutation p-value", "Hedges' g", "Error Rate", "Power") 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Permutation Test, Effect Size, and Power", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
 ```
 
