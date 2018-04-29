@@ -471,6 +471,9 @@ stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Art
 
 ##Discussion
 
+Taking all of this data into consideration, what would a stereotypical comment on a paper look like from professor one? Professor one's most frequent types of comments are praising, evaluative, and  macro-oriented that discuss the student's logic and reasoning, organization, and use of evidence. Some examples of this type of commenting would include, "I think you did an excellent job organizing this paragraph. This chain of reasoning doesn't sound quite right to me. I like the evidence you introduce in this article." Professor two's most frequent types of comments are advising, directive, and macro-oriented comments. However, professor two's concentration of different macro articles is scattered throughout the coding schema of Appendix 1. The most frequent article that professor two addresses is about the works cited page and citation errors. Here are some examples of what this professors commenting style looks like: "This in-text citation is incorrect--you should put the period outside the parenthesis. In APA style, you should italicize the title of the journal. I think you could better organize this paragraph by shifting these sentences around." Ultimately, these stereotypical comments are not the only way that the professors commented on the student papers, and there are more factors that play into student learning. However, highlighting the most common approaches that both professors take is useful in differentiating their approaches to commenting.    
+
+
 [Include examples of most steropytical comments.]
 
 Students improve regardless of the two different methods 
