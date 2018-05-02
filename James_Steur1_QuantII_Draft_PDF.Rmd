@@ -28,7 +28,6 @@ library(doParallel)
 library(pwr)
 library(paramtest)
 library(ggplot2)
-library(kableExtra)
 library(stargazer)
 library(devtools)
 ```
@@ -441,27 +440,23 @@ Third, professor one made more comments that were related to big-picture feature
 Finally, in terms of articles, professor 1 has the highest number of comments for organization (n=38), evidence (n=43), and logic and reasoning (n=39). Professor 2 had the highest number of comments for citation errors and the works cited page (n=34). Table 10 highlights the breakdown for all of the coded articles.
 
 ```{r, results="hide", echo=FALSE}
-##Table 9. Contingency table of level comments by class. 
+#Recode Level Comments for Table 9. 
 Level_Comments <- data.frame(table(s15comments$Class, s15comments2$Level))
 colnames(Level_Comments) <- c("Professor", "Level", "Frequency")
 
-##Table 10. Contingency table of article comments by class. 
-Article_Comments <- kable(counts3, caption = "Frequency of Level Comments For Class 1 & 2")
-add_footnote(Article_Comments, c("Professor 1 N=201", "Professor 2 N=178"))
-
+#Recode Article Comments for Table 10.
 Article_Comments <- data.frame(table(s15comments$Class, s15comments2$Article))
 colnames(Article_Comments) <- c("Professor", "Article", "Frequency")
 ```
 
 ```{r, echo=FALSE, results= "asis"}
-##Level Comments
-
+##Table 9. Contingency table of level comments by class. 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Level Comments",
-          notes = "Class 1 N=201. Class 2 N=178.", counts3)
+          notes = "Class 1 N=201. Class 2 N=178.", Level_Comments)
 
-##Article Comments
+##Table 10. Contingency table of article comments by class. 
 stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Frequency of Article Comments",
-          notes = "Class 1 N=201. Class 2 N=178.", counts4)
+          notes = "Class 1 N=201. Class 2 N=178.", Article_Comments)
 ```
 
 # **Part III** 
