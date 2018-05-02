@@ -39,10 +39,10 @@ require(RCurl)
 
 s15comments <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Summer_2015_comments_final.csv"))
 s15students <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Summer_2015_students_final.csv"))
-Table_1 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_1_Jake.csv"))
-Table_2 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_2_Jake.csv"))
-Table_3 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_3_Jake.csv"))
-Table_4 <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_4_Jake.csv"))
+Table_OverallPaired <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_1_Jake.csv"))
+Table_OverallPerm <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_2_Jake.csv"))
+Table_ClassPaired <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_3_Jake.csv"))
+Table_ClassPerm  <- read.csv(text=getURL("https://raw.githubusercontent.com/Jsteur/James_Final_Paper_Files/master/Table_4_Jake.csv"))
 
 #Cleanup Data
 Class1 <- subset(s15students, Class ==1)
@@ -125,8 +125,8 @@ For my macro and overall outcome variables, I reject the null hypothesis. The pa
 
 ```{r, echo=FALSE, results="asis"}
 ##Table 1: Two-Tailed Paired Sample T-Test with 95% CI's for outcomes overall, macro, mid, and micro.
-colnames(Table_1) <- c("Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample               T-Test",notes = "DF=25. Two-tailed test.", Table_1)
+colnames(Table_OverallPaired) <- c("Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Paired Sample               T-Test",notes = "DF=25. Two-tailed test.", Table_OverallPaired)
 ```
 
 But, these are only two *p*-values for the outcome variables overall and macro (herein referred to as overall and macro). I want to be especially cautious and run a permutation test of all my different variables. The permutation test creates a sampling distribution by resampling different observations of the data. More specifically, I can actually assign different outcome values to each observation while keeping the observed outcomes of my data. In the context of a permutation test, the null hypothesis states that the two distributions are equal. Put differently, the null hypothesis says treatment groups do not differ on the dependent varaible. By permuting all the different outcome values, I can see every combination of the possible alternative treatment conditions. Then, I can calculate all possible values of my test statistic by permuting all the different combinations of my control and treatment groups. Stated otherwise, if my outcome is independent of the treatment, the permutation test allows me to see the difference in means for my observed data; afterwards, I can see these difference in means to compare all the possible differences in my data.
@@ -219,8 +219,8 @@ I found a power rate of 0.72 for overall and 0.61 for macro after taking the ave
 
 ```{r, echo=FALSE, results="asis"}
 ##Table 2
-colnames(Table_2) <- c("Level", "95% CI", "Permutation p-value", "Cohen's d", "Error Rate", "Power")
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Permutation Test, Effect Size, and Power",notes = "DF=25. Two-tailed test.", Table_2)
+colnames(Table_OverallPerm) <- c("Level", "95% CI", "Permutation p-value", "Cohen's d", "Error Rate", "Power")
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Pooled Classes Permutation Test, Effect Size, and Power",notes = "DF=25. Two-tailed test.", Table_OverallPerm)
 ```
 
 What does all  this analysis actually say about students learning how to write? It appears that students are learning how to write better from their classes. There is an average shift of 0.5 in the mean difference of students' overall paper quality, which means that most students started out at a "B" level of writing and ended the class with a final paper grade of "B+" or "A-." This is a huge shift in learning for one semester! Simply showing that students are learning how to write from professors comments is an important milestone. Moreover, most of this improvement is on global issues of writing related to thesis development, organization, logic, and use of evidence. Although one teacher emphasized grammar and citation style, both primarily commented on global features of the writing. Thankfully, students appear to be learning from their classes. 
@@ -240,8 +240,8 @@ t.test(Class2$Macro2, Class2$Macro1, paired = TRUE, alternative = "two.sided")
 After subsetting the two classes, my sample size shrunk. My class 1 n=16 and class 2 n=10. However, despite these small sample sizes, I still reject the null hypothesis for class 1's overall and macro outcomes (Table 3). Conversely, I fail to reject the null hypothesis for class 2's overall and macro outcomes with *p*=0.052, which is just on the threshold of statistical significance. 
 
 ```{r, echo=FALSE, results="asis"}
-colnames(Table_3) <- c("Class and Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test",notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_3)
+colnames(Table_ClassPaired) <- c("Class and Level", "95% CI", "t-statistic", "p-value", "Mean Difference") 
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Paired Sample T-Test",notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_ClassPaired)
 ```
 
 ```{r, results="hide", include=FALSE}
@@ -298,8 +298,8 @@ After I found my error rates, I decided to find the power rate for the two class
 Unsurprisingly, I have low power rates of 0.450 for Class 1 Overall as well as 0.3 for Class 2 Overall, Class 1 Macro, and Class 2 Macro (Table 4). This is unfortunate. It's highly possible that some type of effect is occurring with these students, but the test power is small, so I'm not detecting any noticeable effects. I do, however, detect an effect for improvement in the first class' overall paper quality. Hedges' g for Class 1 Overall is 0.67 with a mean difference of 0.5. In practical terms, this means a student's first paper would be graded as a "B", and their final paper grade would be a "B+" or "A-." Moreover, given the effect size of 0.67, it is entirely possible that teachers could see their students improve their writing ability over the course of the semester.
 
 ```{r, echo=FALSE, results="asis"}
-colnames(Table_4) <- c("Class and Level", "95% CI", "Permutation p-value", "Hedges' g", "Error Rate", "Power") 
-stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Permutation Test, Effect Size, and Power", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_4)
+colnames(Table_ClassPerm) <- c("Class and Level", "95% CI", "Permutation p-value", "Hedges' g", "Error Rate", "Power") 
+stargazer(summary=FALSE, header=FALSE, type = "latex", title = "Separate Classes Permutation Test, Effect Size, and Power", notes = "Class 1 DF=15. Class 2 DF=9. Two-tailed test for both classes.", Table_ClassPerm)
 ```
 
 ```{r, results="hide", include=FALSE}
