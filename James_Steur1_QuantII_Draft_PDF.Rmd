@@ -396,7 +396,7 @@ I've identified that students receiving comments on their papers improve by the 
 First, there is a noticeable difference in the primary ways that professors one and two comment in terms of their purpose. Professor one has a high frequency of praising his or her students. A praising comment would indicate that the professor approves of a choice in the student's writing, which may or may not include an additional suggestion. For example, a comment that praises would say something like, "Good work! I enjoy your transition sentence." Professor two, on the other hand, primarily relies on advising by giving general feedback without making a specific correction. Some examples of advising would be, "This paragraph would be more compelling if you discussed the counterargument more," or "you should delete this sentence." Both professors had roughly equal levels of problem detecting purpose comments. Generally, these comments took the form of "this isn't accurate." Table 7 shows the different types of comments that occurred.
 
 ```{r, echo=FALSE, results= "asis"}
-##Table 7. Summary 
+##Table 7. Contingency table of purpose comments by class.  
 
 Purpose_Comments <- data.frame(table(s15comments$Class, s15comments2$Purpose))
 colnames(Purpose_Comments) <- c("Professor", "Purpose", "Frequency")
@@ -408,13 +408,13 @@ stargazer(summary=FALSE, header=FALSE, type = "latex",
 Second, professor one's style of commenting was primarily evaluative. This style of commenting evaluates the writing quality as "good" or "bad." Professor one may write something like, “This paper is great and needs little revision!” Importantly, professor one primarily relied on positive evaluation. Although there were some negative evaluative comments, most of them were positive evaluations. Professor two's style of commenting was primarily a directive approach. This style of commenting advises students to make a change in their writing without directly making the change. For instance, a comment like, “In future papers, you should develop your thesis more,” would be a directive. Table 8 shows the breakdown of each professors' style of commenting.
 
 ```{r, echo=FALSE, results= "asis"}
-##Style Comments
+##Table 8. Contingency table of style comments by class.  
 
-counts1 <- data.frame(table(s15comments$Class, s15comments2$Style))
-colnames(counts1) <- c("Professor", "Style", "Frequency")
+Style_Comments <- data.frame(table(s15comments$Class, s15comments2$Style))
+colnames(Style_Comments) <- c("Professor", "Style", "Frequency")
 stargazer(summary=FALSE, header=FALSE, type = "latex", 
           title = "Frequency of Purpose Comments",
-          notes = "Class 1 N=201. Class 2 N=178.", counts1)
+          notes = "Class 1 N=201. Class 2 N=178.", Style_Comments)
 ```
 
 I have created Figure 1 to highlight the stark differences in the purpose and style of each professors commenting. As a reminder, I and another researcher coded each comment a professor made across seven dimensions: class, paper, student, purpose, style, level, and article. By highlighting the frequency of purpose and style together, it is easier to visualize how each professor comments on student papers. Importantly, this figure combines all comments from the first and last paper of the semester for both professors. Both professors had distinct commenting styles and combining comments from the first and last paper highlight these differences.
@@ -441,16 +441,16 @@ Third, professor one made more comments that were related to big-picture feature
 Finally, in terms of articles, professor 1 has the highest number of comments for organization (n=38), evidence (n=43), and logic and reasoning (n=39). Professor 2 had the highest number of comments for citation errors and the works cited page (n=34). Table 10 highlights the breakdown for all of the coded articles.
 
 ```{r, results="hide", echo=FALSE}
-##Level 
-counts3 <- data.frame(table(s15comments$Class, s15comments2$Level))
-colnames(counts3) <- c("Professor", "Level", "Frequency")
+##Table 9. Contingency table of level comments by class. 
+Level_Comments <- data.frame(table(s15comments$Class, s15comments2$Level))
+colnames(Level_Comments) <- c("Professor", "Level", "Frequency")
 
-##Article
-Table_99 <- kable(counts3, caption = "Frequency of Level Comments For Class 1 & 2")
-add_footnote(Table_99, c("Professor 1 N=201", "Professor 2 N=178"))
+##Table 10. Contingency table of article comments by class. 
+Article_Comments <- kable(counts3, caption = "Frequency of Level Comments For Class 1 & 2")
+add_footnote(Article_Comments, c("Professor 1 N=201", "Professor 2 N=178"))
 
-counts4 <- data.frame(table(s15comments$Class, s15comments2$Article))
-colnames(counts4) <- c("Professor", "Article", "Frequency")
+Article_Comments <- data.frame(table(s15comments$Class, s15comments2$Article))
+colnames(Article_Comments) <- c("Professor", "Article", "Frequency")
 ```
 
 ```{r, echo=FALSE, results= "asis"}
