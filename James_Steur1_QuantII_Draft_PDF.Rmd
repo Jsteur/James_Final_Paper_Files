@@ -286,6 +286,7 @@ cohen.d(Class2$Macro2,Class2$Macro1,pooled=TRUE,paired=TRUE,
 I used Hedges' g to find the effect size for the two different classes and their respective outcome variables (Table 4). One reason I chose Hedges' g are my sample sizes. When n $\le$ 20, Hedges' g produces less biased effect sizes since it divides the difference in means by the pooled and weighted standard deviations of the sample. Dividing by the pooled and weighted standard deviation helps account for the small sample size by getting a more precise measure of the standard deviation of the small sample and removes a small positive bias (Hedges, 1981). If I were to use Cohen's d for these different calculations, the effect sizes could be more positively biased given the small sample sizes. Moreover, Hedges' g assumes that the variences of both populations are equal, and thankfully the variences are equal in my data.
 
 ```{r, results="hide", include=FALSE}
+#Power rates for classes. Outcome variables are overall and macro.
 pwr.t.test(n=16, d=0.6674, sig.level = 0.05, power=NULL)
 pwr.t.test(n=10, d=0.6772, sig.level = 0.05, power=NULL)
 pwr.t.test(n=16, d=0.524, sig.level = 0.05, power=NULL)
@@ -666,7 +667,3 @@ The 2 paper is also organized around a thesis statement, but the thesis may not 
 ###1 Paper
 
 The 1 paper has no central idea or one that is too general to be developed. Paragraphs are not logically connected, and transitions do not generally exist. Development is inadequate with poor balance between general ideas and specific support. Sentences are often ungrammatical and word choice faulty. As a result, the paper fails to present a conscientious inquiry into a problem and seems to disregard its audience.
-
-\pagebreak
-
-#Appendix 3: Code Appendix
