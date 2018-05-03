@@ -418,6 +418,7 @@ stargazer(summary=FALSE, header=FALSE, type = "latex",
           title = "Frequency of Purpose Comments", rownames = F,
           notes = "Class 1 N=201. Class 2 N=178.", Style_Comments)
 ```
+\pagebreak
 
 I have created Figure 1 to highlight the stark differences in the purpose and style of each professors commenting. As a reminder, I and another researcher coded each comment a professor made across seven dimensions: class, paper, student, purpose, style, level, and article. By highlighting the frequency of purpose and style together, it is easier to visualize how each professor comments on student papers. Importantly, this figure combines all comments from the first and last paper of the semester for both professors. Both professors had distinct commenting styles and combining comments from the first and last paper highlight these differences.
 
