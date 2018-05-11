@@ -4,6 +4,7 @@ author: "James Steur"
 date: "3/15/2018"
 fontsize: 11pt
 output: pdf_document
+geometry: margin=1.5in
 ---
 #Abstract
 
