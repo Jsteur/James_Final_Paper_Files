@@ -73,15 +73,11 @@ An extended implication of extending this research is reproducible research. At 
 
 In the end, professors can understand how their comments influence students' writing and thinking from conducting research, but there is a large hole in the literature. All of this existing literature, or lack thereof, drove my primary research question: How do professors’ comments on first year English composition students influence student writing? At a broad level, I want to identify **any** improvement that commenting has on student writing. I also explore a related sub-question: Do certain styles of commenting result in more improvement?
 
-##Research Design
 
-##
-What data are you using? 
 What strengths do these data have for helping answer the substantive question? 
 What weaknesses? 
 
 How are you going to compare your groups? 
-How are you handling measurment? 
 
 
 ##Causality
@@ -103,9 +99,11 @@ Reviewers scored these different levels by reading the paper, deciding their sco
 
 ##Group Comparisons
 
-The population of interest in this study is first year undergraduate college students. At a more abstract level, my population of interest is all undergraduate students who take a general education English course. Ultimately, I want to show that students who take an English class actually learn or improve their writing abilities. In order to show improvement, this study used a within-subjects design by looking at the students' first and last papers of the semester. The first paper for all students functioned as a baseline condition for their papers' writing quality. This was the first writing assignment all students completed at the start of the semester, so no other comments that professors wrote confounded these initial assessments of the overall groups.
+The population of interest in this study is all undergraduate students who take a general education English course. Ultimately, I want to learn if students taking an English class actually learn or improve their writing abilities. In order to detect improvement, this study used a within-subjects design by looking at the students' first and last papers of the semester. The first paper for all students functioned as a baseline condition for their papers' writing quality. This was the first writing assignment all students completed at the start of the semester, so no other comments that professors wrote confounded these initial assessments of the overall groups.
 
 ##Strengths & Weaknesses 
+
+One strength of this study are 
 
 This study is limited in three primary ways. First, the researchers of this study were unable to obtain additional information about the students and match on observed covariates. It is possible, for instance, that some students came from high schools that prepared them for college better. It could also be possible that some students are simply more motivated or have disparate writing abilities at the start of the course. There could be a slew of pre-existing differences among students in the different groups that confound these results. A future study could identify observable covariates of the students and use sensitivity analysis to provide additional evidence that professors written comments improve students' writing abilities. 
 
@@ -117,7 +115,7 @@ Last, this research only looks at the first and last comments of the different p
 
 ##Pooled Students Methodology & Results 
 
-This analysis hopes to show some improvement in students' writing ability, so I calculated the overall means for all students' first papers. The evaluation of all students' papers included four outcome variables: the micro, mid, macro, and overall quality (Appendix 2). Afterwards, I calculated the means of the students' second papers and looked at the average difference in means between the two papers.In this study, the "treatment" is the written comments professors provide to their students. Since I am interested in the differences between the two group means, I used a paired-sample t-test with $\alpha$=0.05. ^[I selected this alpha so there is only a 5% chance of committing a type I error.]: I compared these differences in mean with all the outcome variables for the first and last paper that students submit. The larger the difference in means between the two groups, the more likely it is that students are learning how to write more effectively from their courses. Given the small sample size of n=26, the paired sample t-test also increases statistical power. By using a "repeated measures" test that compares differences within subjects, I am less likely to falsely reject the null hypothesis. 
+At baseline, I calculated the overall means for all students' first papers. The evaluation of all students' papers included my four outcome variables: the micro, mid, macro, and overall quality. Afterwards, I calculated the means of the students' second papers and looked at the average difference in means between the two papers. In this study, the "treatment" is the written comments professors provide to their students. Since I am interested in the differences between the two group means, I used a paired-sample t-test with $\alpha$=0.05. ^[I selected this alpha so there is only a 5% chance of committing a type I error.]: I compared these differences in mean with all the outcome variables for the first and last paper that students submit. The larger the difference in means between the two groups, the more likely it is that students are learning how to write more effectively from their courses. Given the small sample size of n=26, the paired sample t-test also increases statistical power. By using a "repeated measures" test that compares differences within subjects, I am less likely to falsely reject the null hypothesis. 
 
 There are six primary assumptions of the paired sample t-test. For purposes of clarity, I outline each assumption and explain how my design addresses them. 
 
@@ -127,7 +125,9 @@ There are six primary assumptions of the paired sample t-test. For purposes of c
 
 3). The dependent variable is measured on an interval or ratio scale. My dependent variables, the macro, mid, micro, and overall quality of the papers are all interval scales. The intervals between each of the numbers represent real equal differences in different dimensions of the papers. Put differently, the intervals between the values from 1-4 are meaningful. Moreover, the differences between the different categories have a consistent meaning with my measurement tool (see Appendix 2). 
 
-4). The dependent variable should not include outliers. In my data set, there are no outliers in the dependent variable. All students received similar scores to one another.  
+4). The dependent variable should not include outliers. If the dependent has outliers, this affects the skew of the distribution, which influences the mean of the data. If the mean of the data is greatly affected, then the mean will be biased. 
+
+In my data set, there are no outliers in the dependent variable. All students received similar scores to one another.  
 
 5). The variances of the dependent variable are assumed to be equal to one another. In my study, the variances are assumed to be equal to one another in this data. There was nothing indicating the variances between the dependent variables scores are different from one another. 
 
