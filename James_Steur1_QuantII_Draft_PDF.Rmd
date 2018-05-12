@@ -73,7 +73,21 @@ An extended implication of extending this research is reproducible research. At 
 
 In the end, professors can understand how their comments influence students' writing and thinking from conducting research, but there is a large hole in the literature. All of this existing literature, or lack thereof, drove my primary research question: How do professors’ comments on first year English composition students influence student writing? At a broad level, I want to identify **any** improvement that commenting has on student writing. I also explore a related sub-question: Do certain styles of commenting result in more improvement?
 
-##Research Design 
+##Research Design
+
+##
+What data are you using? 
+What strengths do these data have for helping answer the substantive question? 
+What weaknesses? 
+
+How are you going to compare your groups? 
+How are you handling questions about causality? 
+How are you handling measurment? 
+
+
+##Group Comparisons
+
+##Causality
 
 This observational study was conducted at a liberal arts college in the Rocky Mountains over the summer of 2015. An email was sent to all professors in May of 2015 who taught first-year English courses to assist with this research project, and two professors agreed to help. As a result, my project used a convenience sample of students. Afterwards, communication occurred between the researchers and professors in order to collect appropriate materials. Both professors agreed to provide their students' first and last papers for their classes in the spring of 2015. Researchers collected papers after professors finished teaching the class to reduce performative commenting. That is, researchers wanted to ensure professors commented on student papers in a natural setting without observation. 
 
