@@ -125,9 +125,7 @@ There are six primary assumptions of the paired sample t-test. For purposes of c
 
 3). The dependent variable is measured on an interval or ratio scale. My dependent variables, the macro, mid, micro, and overall quality of the papers are all interval scales. The intervals between each of the numbers represent real equal differences in different dimensions of the papers. Put differently, the intervals between the values from 1-4 are meaningful. Moreover, the differences between the different categories have a consistent meaning with my measurement tool (see Appendix 2). 
 
-4). The dependent variable should not include outliers. If the dependent has outliers, this affects the skew of the distribution, which influences the mean of the data. If the mean of the data is greatly affected, then the mean will be biased. 
-
-In my data set, there are no outliers in the dependent variable. All students received similar scores to one another.  
+4). The dependent variable should not include outliers. If the dependent has outliers, this affects the skew of the distribution, which influences the mean of the data. If the mean of the data is greatly affected, then the mean will be biased and affect statistical inference with p-values and effect sizes. In my data set, there are no outliers in the dependent variable. All students received similar scores to one another.   
 
 5). The variances of the dependent variable are assumed to be equal to one another. In my study, the variances are assumed to be equal to one another in this data. There was nothing indicating the variances between the dependent variables scores are different from one another. 
 
