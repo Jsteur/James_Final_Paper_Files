@@ -81,19 +81,19 @@ What strengths do these data have for helping answer the substantive question?
 What weaknesses? 
 
 How are you going to compare your groups? 
-How are you handling questions about causality? 
 How are you handling measurment? 
 
 
-##Group Comparisons
-
 ##Causality
+
+This study primarily aims to see the effects of a cause rather than the causes of an effect. One reason for this emphasis is data limitations. Unfortunately, researchers only knew the participants were first-year students in their second semester of college---they had no other identifying information. Given this limitation, it is impossible to identify all the potential lurking varaibles that could influence student performance. Perhaps a student had a death in the family which impacts their school performance; perhaps some students are simply more motivated; perhaps some students came from high schools that prepared them better for college. In short, there are many lurking variables that confound the specific causal mechanisms of the design and its results. Consequently, this study focuses on showing the effects of a cause and then discuss INUS conditions that could influence these results.
+
+##Data Collection 
 
 This observational study was conducted at a liberal arts college in the Rocky Mountains over the summer of 2015. An email was sent to all professors in May of 2015 who taught first-year English courses to assist with this research project, and two professors agreed to help. As a result, my project used a convenience sample of students. Afterwards, communication occurred between the researchers and professors in order to collect appropriate materials. Both professors agreed to provide their students' first and last papers for their classes in the spring of 2015. Researchers collected papers after professors finished teaching the class to reduce performative commenting. That is, researchers wanted to ensure professors commented on student papers in a natural setting without observation. 
 
 All participants names and grades were omitted from these papers for evaluation purposes. In addition, the researchers were blinded from any identifying information about the students to reduce bias in the results. Then, two researchers used a modified code scheme (Beason, 1993) to assess the different dimensions of professors' commenting styles on student papers across four different dimensions: purpose, style, level, and article.  (see Appendix 1). 
 #=====Include more information here about the specific commenting styles. 
-
 
 No written paragraphs at the end of the paper were included in the coding analysis. Researchers made this choice for one primary reason: professors summarized the bulk of their comments they made throughout the paper. As a result, researchers did not want to "double code" certain kinds of comments into the analysis and skew the data in one direction. After researchers coding all comments on the papers, n=382. The first class had 201 written comments and the second class had 178 written comments. 
 
@@ -101,7 +101,11 @@ Afterwards, two researchers used a rubric to assess the quality of all students'
 
 Reviewers scored these different levels by reading the paper, deciding their scores, and sharing their scores with the fellow researcher. Thankfully, the researchers mostly gave the same scores for the different papers after sharing their analysis. In the few cases where the evaluators disagreed on a score, they returned to the rubric and agreed on a final score before moving forward. After sharing their respective scores, most of the scores for the paper scorers were the same. Researchers did this for all four papers in the two different class sections: class one had sixteen students and class two had ten students. ^[After reviewers read the papers, there was no evidence to indicate that any of the participants were non-native English speakers. Including non-native English speakers could confound the results of this study.] 
 
-This study primarily aims to see the effects of a cause rather than the causes of an effect. One reason for this emphasis is data limitations. Unfortunately, researchers only knew the participants were first-year students in their second semester of college---they had no other identifying information. Given this limitation, it is impossible to identify all the potential lurking varaibles that could influence student performance. Perhaps a student had a death in the family which impacts their school performance; perhaps some students are simply more motivated; perhaps some students came from high schools that prepared them better for college. In short, there are many lurking variables that confound the specific causal mechanisms of the design and its results. Consequently, this study focuses on showing the effects of a cause and then discuss INUS conditions that could influence these results.
+##Group Comparisons
+
+The population of interest in this study is first year undergraduate college students. At a more abstract level, my population of interest is all undergraduate students who take a general education English course. Ultimately, I want to show that students who take an English class actually learn or improve their writing abilities. In order to show improvement, this study used a within-subjects design by looking at the students' first and last papers of the semester. The first paper for all students functioned as a baseline condition for their papers' writing quality. This was the first writing assignment all students completed at the start of the semester, so no other comments that professors wrote confounded these initial assessments of the overall groups.
+
+##Strengths & Weaknesses 
 
 This study is limited in three primary ways. First, the researchers of this study were unable to obtain additional information about the students and match on observed covariates. It is possible, for instance, that some students came from high schools that prepared them for college better. It could also be possible that some students are simply more motivated or have disparate writing abilities at the start of the course. There could be a slew of pre-existing differences among students in the different groups that confound these results. A future study could identify observable covariates of the students and use sensitivity analysis to provide additional evidence that professors written comments improve students' writing abilities. 
 
@@ -112,8 +116,6 @@ Last, this research only looks at the first and last comments of the different p
 # **Part II** 
 
 ##Pooled Students Methodology & Results 
-
-The population of interest in this study is first year undergraduate college students. At a more abstract level, my population of interest is all undergraduate students who take a general education English course. Ultimately, I want to show that students who take an English class actually learn or improve their writing abilities. In order to show improvement, this study used a within-subjects design by looking at the students' first and last papers of the semester. The first paper for all students functioned as a baseline condition for their papers' writing quality. This was the first writing assignment all students completed at the start of the semester, so no other comments that professors wrote confounded these initial assessments of the overall groups. 
 
 This analysis hopes to show some improvement in students' writing ability, so I calculated the overall means for all students' first papers. The evaluation of all students' papers included four outcome variables: the micro, mid, macro, and overall quality (Appendix 2). Afterwards, I calculated the means of the students' second papers and looked at the average difference in means between the two papers.In this study, the "treatment" is the written comments professors provide to their students. Since I am interested in the differences between the two group means, I used a paired-sample t-test with $\alpha$=0.05. ^[I selected this alpha so there is only a 5% chance of committing a type I error.]: I compared these differences in mean with all the outcome variables for the first and last paper that students submit. The larger the difference in means between the two groups, the more likely it is that students are learning how to write more effectively from their courses. Given the small sample size of n=26, the paired sample t-test also increases statistical power. By using a "repeated measures" test that compares differences within subjects, I am less likely to falsely reject the null hypothesis. 
 
